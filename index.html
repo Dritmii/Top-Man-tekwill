@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-translate="aboutTitle">О нас | Барбершоп</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css">
+    <title data-translate="indexTitle">Top Man Barbershop</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header class="header">
         <!-- Логотип слева -->
@@ -37,53 +40,60 @@
         </nav>
     </header>
     
+    
 
     <main>
-        <div class="heroabout">
-            <img src="../img/image 36.png" alt="Барбершоп">
-            <h2 class="hero-title" data-translate="aboutHeader">О нас</h2>
-        </div>
-
-        <div class="container">
-            <div class="info">
-                <div class="left">
-                    <h2 style="color: #ffb100;" data-translate="wantLookPerfectHeader">Хочешь выглядеть безупречно?</h2>
-                    <p data-translate="wantLookPerfectText">Приглашаем тебя в наш барбершоп! Опытные мастера создадут неповторимый образ, который подчеркнет твою индивидуальность. Современные стрижки, стильная борода, качественные средства для ухода – все это ждет тебя у нас!</p>
-                </div>
-                <div class="left">
-                    <h2 data-translate="visitUsHeader">Посети нас</h2>
-                    <p data-translate="workingHours">Пн-Пт: 9:00 - 19:00 | Сб-Вс: 9:00 - 17:00</p>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2 data-translate="ourTeamHeader">Наша команда</h2>
-                <div class="team">
-                    <div class="team-member">
-                        <img src="" alt="">
-                        <p><strong data-translate="teamMemberAlexandr">Alexandr</strong><br data-translate="teamMemberTopBarber">Top barber</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="" alt="">
-                        <p><strong data-translate="teamMemberRadu">Radu</strong><br data-translate="teamMemberBarber">Barber</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="" alt="">
-                        <p><strong data-translate="teamMemberEkaterina">Ekaterina</strong><br data-translate="teamMemberBarber">Barber</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="" alt="">
-                        <p><strong data-translate="teamMemberIvan">Ivan</strong><br data-translate="teamMemberJuniorBarber">Junior barber</p>
-                    </div>
-                </div>
+        <div class="hero">
+            <div class="overlay">
+                <h1 data-translate="slogan">"Стильный уход для джентльменов"</h1>
+                <button class="btn" data-translate="booking" onclick="showAlert()">Запись</button>
             </div>
         </div>
-
+    
+        <section id="services" class="carousel-container">
+            <button class="carousel-btn prev">&#10094;</button>
+            <button class="carousel-btn next">&#10095;</button>
+    
+            <div class="carousel">
+                <div class="carousel-item">
+                    <img src="img/image 32.png" alt="Фото 1">
+                    <p data-translate="haircut">Стрижка от 200 лей</p>
+                    <button class="btn" data-translate="booking">Запись</button>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/istockphoto-1185955900-612x612 1.png" alt="Фото 2">
+                    <p data-translate="beard">Оформление бороды от 160 лей</p>
+                    <button class="btn" data-translate="booking">Запись</button>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/image 35.png" alt="Фото 3">
+                    <p data-translate="waxing">Ваксинг от 100 лей</p>
+                    <button class="btn" data-translate="booking">Запись</button>
+                </div>
+            </div>
+        </section>
+    
+        <section id="why-us" class="why-us">
+            <div class="why-us-container">
+                <div class="why-us-text">
+                    <h2 data-translate="whyUs">Почему мы?</h2>
+                    <p data-translate="whyUsText1">Наши барберы — профессионалы своего дела...</p>
+                    <p data-translate="whyUsText2">В нашем барбершопе ты сможешь расслабиться...</p>
+                    <p data-translate="whyUsText3">Мы предлагаем не просто стрижки и бритье...</p>
+                    <p data-translate="whyUsText4">Мы используем только проверенные средства...</p>
+                    <p data-translate="whyUsText5">Каждое посещение — это время для себя...</p>
+                </div>
+                <div class="why-us-image">
+                    <img src="img/image3.png" alt="Барбер за работой">
+                </div>
+            </div>
+        </section>
     </main>
+
     <footer id="contact">
         <div class="footer-container">
             <div class="footer-logo">
-                <img src="../img/image_29-removebg-preview 1.png" alt="Top Man Barbershop">
+                <img src="img/image_29-removebg-preview 1.png" alt="Top Man Barbershop">
             </div>
             <div class="footer-services">
                 <h3 data-translate="services">Услуги</h3>
@@ -100,19 +110,19 @@
                 <h3 data-translate="contacts">Контакты</h3>
                 <ul>
                     <li class="contact-item">
-                        <img src="../img/Телефон.svg" alt="Телефон"> 
+                        <img src="img/Телефон.svg" alt="Телефон"> 
                         <a href="tel:+37361111189">+373 (61) 111 189</a>
                     </li>
                     <li class="contact-item">
-                        <img src="../img/Локация.svg" alt="Адрес"> 
+                        <img src="img/Локация.svg" alt="Адрес"> 
                         <a href="https://maps.app.goo.gl/9taKbz49qYcP1yCP8" target="_blank" data-translate="address">Balti, Alexandru cel Bun 40a</a>
                     </li>
                     <li class="contact-item">
-                        <img src="../img/Telegram.svg" alt="Telegram"> 
+                        <img src="img/Telegram.svg" alt="Telegram"> 
                         <a href="https://t.me/topmanbarbershop1" target="_blank">Telegram: @topmanbarbershop1</a>
                     </li>
                     <li class="contact-item">
-                        <img src="../img/Instagram.svg" alt="Instagram"> 
+                        <img src="img/Instagram.svg" alt="Instagram"> 
                         <a href="https://www.instagram.com/barbershoptopman_/" target="_blank">Instagram: barbershoptopman_</a>
                     </li>
                 </ul>
@@ -121,8 +131,9 @@
         <p class="footer-note" data-translate="projectNote">Сайт сделан в рамках проекта Tekwill</p>
         <p class="footer-copyright">&copy; 2025 Top Man Barbershop</p>
     </footer>
+    
 
-    <script src="../JS/scripts.js"></script>
-    <script src="../JS/scripts_translate.js"></script>
+<script src="JS/scripts.js"></script>
+<script src="JS/scripts_translate.js"></script>
 </body>
 </html>

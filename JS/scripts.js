@@ -49,93 +49,45 @@ document.addEventListener("DOMContentLoaded", function () {
         updateCarousel();
     }
     
-    // Привязка событий для кнопок карусели
+    // Привязка кнопок управления каруселью
     if (prevButton && nextButton) {
-        prevButton.addEventListener("click", prevSlide);
-        nextButton.addEventListener("click", nextSlide);
+        prevButton.addEventListener('click', prevSlide);
+        nextButton.addEventListener('click', nextSlide);
     } else {
-        console.error("Кнопки карусели не найдены!");
-    }
-    
-    // Настройка автоматического переключения слайдов
-    if (totalSlides > 1) {
-        setInterval(nextSlide, 10000);
+        console.error("Не найдены кнопки управления каруселью!");
     }
 
-    // Обработчик для плавной прокрутки по ссылкам в навигации
-    document.querySelectorAll('.nav a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href.includes("#")) {
-                e.preventDefault();
-                const targetId = href.substring(1);  // Получаем id из хеша
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 50,  // Учитываем отступ (можно изменить)
-                        behavior: 'smooth'
-                    });
-                }
-            }
+    // Функция для обработки выбора языка
+    const languageSelect = document.querySelector('#languageSelect');
+    if (languageSelect) {
+        languageSelect.addEventListener('change', function () {
+            const selectedLanguage = languageSelect.value;
+            document.documentElement.lang = selectedLanguage;
+            changeLanguage(selectedLanguage);
         });
-    });
+    } else {
+        console.error("Не найден элемент выбора языка!");
+    }
 
-    // Функция для смены языка
-    function changeLanguage(event) {
-        const lang = event.target.value;
-        document.documentElement.lang = lang;
-        
-        if (!translations[lang]) {
-            console.error("Язык не найден в translations:", lang);
-            return;
-        }
-
-        document.querySelectorAll("[data-translate]").forEach(element => {
-            const key = element.getAttribute("data-translate");
-            if (translations[lang] && translations[lang][key]) {
-                element.textContent = translations[lang][key];
+    // Функция для изменения языка
+    function changeLanguage(language) {
+        const translationElements = document.querySelectorAll('[data-translate]');
+        translationElements.forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[language] && translations[language][key]) {
+                element.textContent = translations[language][key];
             }
         });
     }
-
-    // Привязка обработчика события для кнопок карусели
-    document.querySelectorAll(".carousel-item .btn").forEach(button => {
-        button.addEventListener("click", showAlert);
-    });
-
-    // Привязка обработчика для изменения языка через селект
-    document.querySelector('#languageSelect').addEventListener('change', changeLanguage);
 });
 
 
 
-// Содержимое для разных языков
-const languageContent = {
-    en: {
-        greeting: "Hello, world!",
-        description: "This is an example page with language switching."
-    },
-    ru: {
-        greeting: "Привет, мир!",
-        description: "Это пример страницы с переключением языка."
-    }
-};
+document.addEventListener("DOMContentLoaded", function () {
+    const burger = document.querySelector(".hamburger-btn");
+    const nav = document.querySelector(".nav");
 
-// Получаем язык из localStorage или устанавливаем по умолчанию 'ru'
-let currentLanguage = localStorage.getItem('language') || 'ru';
-
-// Функция для обновления текста на странице
-function updateContent() {
-    document.getElementById('greeting').textContent = languageContent[currentLanguage].greeting;
-    document.getElementById('description').textContent = languageContent[currentLanguage].description;
-}
-
-// Функция для переключения языка
-document.getElementById('lang-toggle').addEventListener('click', () => {
-    currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';  // Меняем язык
-    localStorage.setItem('language', currentLanguage);  // Сохраняем язык в localStorage
-    updateContent();  // Обновляем контент на странице
+    burger.addEventListener("click", function () {
+        nav.classList.toggle("show");
+    });
 });
-
-// Инициализация контента на странице
-updateContent();

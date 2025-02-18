@@ -1,7 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
     const languageSelect = document.querySelector("#languageSelect");
 
-    // Переводы для разных языков
     const translations = {
         ru: {
             indexTitle: "Top Man Barbershop",
@@ -19,22 +18,26 @@ document.addEventListener('DOMContentLoaded', function () {
             teamMemberEkaterina: "Екатерина",
             teamMemberIvan: "Иван",
             teamMemberJuniorBarber: "Младший барбер",
-            services: "Услуги",
-            contacts: "Контакты",
-            address: "Balti, Alexandru cel Bun 40a",
-            projectNote: "Сайт сделан в рамках проекта Tekwill",
             slogan: '"Стильный уход для джентльменов"',
             booking: "Запись",
             services: "Услуги",
-            haircut: "Стрижка от 200 лей",
-            beard: "Оформление бороды от 160 лей",
-            waxing: "Ваксинг от 100 лей",
+            haircut: "Стрижка",
+            beard: "Оформление бороды",
+            waxing: "Ваксинг",
+            kidsHaircut: "Детская стрижка",
+            shaving: "Бритье",
+            styling: "Укладка волос",
             whyUs: "Почему мы?",
             whyUsText1: "Наши барберы — профессионалы своего дела...",
             whyUsText2: "В нашем барбершопе ты сможешь расслабиться...",
             whyUsText3: "Мы предлагаем не просто стрижки и бритье...",
             whyUsText4: "Мы используем только проверенные средства...",
             whyUsText5: "Каждое посещение — это время для себя...",
+            contacts: "Контакты",
+            home: "Главная",
+            about: "О нас",
+            address: "Balti, Alexandru cel Bun 40a",
+            projectNote: "Сайт сделан в рамках проекта Tekwill",
         },
         en: {
             indexTitle: "Top Man Barbershop",
@@ -52,22 +55,26 @@ document.addEventListener('DOMContentLoaded', function () {
             teamMemberEkaterina: "Ekaterina",
             teamMemberIvan: "Ivan",
             teamMemberJuniorBarber: "Junior barber",
-            services: "Services",
-            contacts: "Contacts",
-            address: "Balti, Alexandru cel Bun 40a",
-            projectNote: "Website created as part of the Tekwill project",
             slogan: '"Stylish care for gentlemen"',
             booking: "Booking",
             services: "Services",
-            haircut: "Haircut from 200 lei",
-            beard: "Beard trimming from 160 lei",
-            waxing: "Waxing from 100 lei",
+            haircut: "Haircut",
+            beard: "Beard trimming",
+            waxing: "Waxing",
+            kidsHaircut: "Children's haircut",
+            shaving: "Shaving",
+            styling: "Hair styling",
             whyUs: "Why Us?",
             whyUsText1: "Our barbers are professionals in their field...",
             whyUsText2: "In our barbershop, you can relax...",
             whyUsText3: "We offer not just haircuts and shaves...",
             whyUsText4: "We only use trusted products...",
-            whyUsText5: "Every visit is time for yourself..."
+            whyUsText5: "Every visit is time for yourself...",
+            contacts: "Contacts",
+            home: "Home",
+            about: "About us",
+            address: "Balti, Alexandru cel Bun 40a",
+            projectNote: "Website created as part of the Tekwill project",
         },
         ro: {
             indexTitle: "Top Man Barbershop",
@@ -85,56 +92,52 @@ document.addEventListener('DOMContentLoaded', function () {
             teamMemberEkaterina: "Ekaterina",
             teamMemberIvan: "Ivan",
             teamMemberJuniorBarber: "Barber junior",
-            services: "Servicii",
-            contacts: "Contacte",
-            address: "Balti, Alexandru cel Bun 40a",
-            projectNote: "Site creat în cadrul proiectului Tekwill",
             slogan: '"Îngrijire stilată pentru bărbați"',
             booking: "Programare",
             services: "Servicii",
-            haircut: "Tuns de la 200 lei",
-            beard: "Tunsul bărbii de la 160 lei",
-            waxing: "Vaksing de la 100 lei",
+            haircut: "Tuns",
+            beard: "Tunsul bărbii",
+            waxing: "Vaksing",
+            kidsHaircut: "Tunsoare pentru copii",
+            shaving: "Bărbierit",
+            styling: "Coafură",
             whyUs: "De ce noi?",
             whyUsText1: "Barbierii noștri sunt profesioniști în domeniul lor...",
             whyUsText2: "În barbershop-ul nostru poți să te relaxezi...",
             whyUsText3: "Oferim nu doar tunsori și bărbierit...",
             whyUsText4: "Folosim doar produse de încredere...",
             whyUsText5: "Fiecare vizită este timpul tău pentru tine...",
+            contacts: "Contacte",
+            home: "Principală",
+            about: "Despre noi ",
+            address: "Balti, Alexandru cel Bun 40a",
             projectNote: "Site-ul a fost creat în cadrul proiectului Tekwill",
-            address: "Balti, Alexandru cel Bun 40a"
         }
     };
 
-    // Функция для изменения языка на странице
     function changeLanguage(event) {
         const lang = event.target.value;
         document.documentElement.lang = lang;
+        localStorage.setItem("language", lang);
 
-        document.querySelectorAll("[data-translate]").forEach(element => {
+        document.querySelectorAll("[data-translate]").forEach((element) => {
             const key = element.getAttribute("data-translate");
             if (translations[lang][key]) {
                 element.textContent = translations[lang][key];
             }
         });
 
-        // Обновляем title страницы
-        document.title = translations[lang].aboutTitle;
+        // Меняем title страницы
+        if (translations[lang].indexTitle) {
+            document.title = translations[lang].indexTitle;
+        }
     }
 
     // Слушатель на изменение языка
     languageSelect.addEventListener("change", changeLanguage);
 
-    // Проверка на наличие сохраненного языка в localStorage
-    if (localStorage.getItem("language")) {
-        const savedLanguage = localStorage.getItem("language");
-        languageSelect.value = savedLanguage;
-        changeLanguage({ target: { value: savedLanguage } });
-    }
-
-    // Сохранение выбранного языка в localStorage
-    languageSelect.addEventListener("change", function() {
-        localStorage.setItem("language", languageSelect.value);
-    });
+    // Проверяем сохраненный язык
+    const savedLanguage = localStorage.getItem("language") || "ru";
+    languageSelect.value = savedLanguage;
+    changeLanguage({ target: { value: savedLanguage } });
 });
-
