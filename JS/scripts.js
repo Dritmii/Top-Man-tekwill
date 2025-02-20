@@ -1,30 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Скрипт загружен");
-
     const burger = document.querySelector(".hamburger-btn");
     const nav = document.querySelector(".nav");
-    const navLinks = document.querySelectorAll(".nav a"); // Получаем все ссылки в меню
+    const navLinks = document.querySelectorAll(".nav a");
 
-    // Проверка на существование элементов
+    // Обработчик для открытия и закрытия меню
     if (burger && nav) {
-        // Обработчик для открытия и закрытия меню
         burger.addEventListener("click", function (event) {
-            event.stopPropagation(); // Останавливаем всплытие события
-            nav.classList.toggle("show"); // Переключаем класс show
-            console.log(nav.classList.contains("show") ? "Меню открыто" : "Меню закрыто");
+            event.stopPropagation();
+            nav.classList.toggle("show");
         });
 
         // Закрытие меню при клике вне бургер-меню или навигации
         document.addEventListener("click", function (event) {
             if (!burger.contains(event.target) && !nav.contains(event.target)) {
-                nav.classList.remove("show"); // Убираем класс show, если клик не по бургеру или меню
+                nav.classList.remove("show");
             }
         });
 
         // Закрытие меню при клике на любую ссылку
         navLinks.forEach(link => {
             link.addEventListener("click", function () {
-                nav.classList.remove("show"); // Закрываем меню
+                nav.classList.remove("show");
             });
         });
     }
@@ -48,8 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let index = 0;
 
     function updateCarousel() {
-        const slideWidth = slides[0]?.offsetWidth || 0;
-        carousel.style.transform = `translateX(-${index * slideWidth}px)`;
+        const slideWidth = slides[0]?.offsetWidth || 0; // Проверка на ширину слайда
+        if (carousel && slideWidth > 0) {
+            carousel.style.transform = `translateX(-${index * slideWidth}px)`;
+        }
     }
 
     function nextSlide() {
@@ -67,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         nextButton.addEventListener("click", nextSlide);
     }
 
-    setInterval(nextSlide, 5000);
+    setInterval(nextSlide, 5000); // Плавный переход с интервалом
     window.addEventListener("resize", updateCarousel);
     updateCarousel();
 
