@@ -4,20 +4,24 @@ body {
     font-family: "JetBrains Mono", sans-serif;
     background-color: #111;
     color: white;
+    overflow-x: hidden;
 }
 
 /* Шапка */
 .header {
+    width: 100%;
+    max-width: 100vw;
+    padding: 10px 15px;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: black;
-    position: relative;
 }
 
+/* Логотип */
 .logo img {
     height: 50px;
+    max-width: 100%;
 }
 
 /* Меню */
@@ -25,41 +29,31 @@ body {
     display: flex;
     gap: 20px;
     align-items: center;
+    transition: all 0.3s ease-in-out;
+    width: auto;
 }
 
 .nav a, .footer-contacts a {
     color: white;
     text-decoration: none;
     font-size: 14px;
+    white-space: nowrap; /* Блокируем перенос текста */
 }
 
 /* Языковой переключатель */
-.language-selector {
-    position: relative;
-    margin-left: 20px;
-}
-
 .language-selector select {
     background-color: #222;
     color: white;
     border: 1px solid #444;
     padding: 8px 25px 8px 10px;
     font-size: 14px;
-    font-family: "JetBrains Mono", sans-serif;
     border-radius: 5px;
-    appearance: none;
-    outline: none;
     cursor: pointer;
     transition: background 0.3s, border-color 0.3s;
 }
 
 .language-selector select:hover {
     background-color: #333;
-}
-
-.language-selector select:focus {
-    border-color: #ffb100;
-    box-shadow: 0 0 5px rgba(255, 179, 0, 0.6);
 }
 
 /* Бургер-меню */
@@ -71,6 +65,10 @@ body {
     flex-direction: column;
     gap: 6px;
     padding: 5px;
+    z-index: 15;
+    position: absolute;
+    right: 15px;
+    top: 10px;
 }
 
 .hamburger-icon {
@@ -80,13 +78,8 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Мобильная версия */
+/* Мобильное меню */
 @media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
     .nav {
         display: none;
         position: absolute;
@@ -106,19 +99,12 @@ body {
 
     .hamburger-btn {
         display: flex;
-        position: absolute;
-        right: 20px;
-        z-index: 10;
     }
 
-    .language-selector {
-        margin: 10px 0;
-    }
-}
-
-@media (min-width: 769px) {
-    .nav {
-        display: flex !important;
+    .nav a {
+        width: 100%;
+        padding: 10px 0;
+        display: block;
     }
 }
 
@@ -130,7 +116,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-bottom: 50px;
+    position: relative;
 }
 
 .overlay {
@@ -145,6 +131,7 @@ body {
     left: 5%;
     font-size: 40px;
     font-weight: bold;
+    max-width: 90vw;
 }
 
 /* Кнопки */
@@ -165,34 +152,30 @@ body {
 }
 
 /* Карусель */
-/* Основные стили для карусели */
 .carousel-container {
     width: 80%;
     max-width: 900px;
     margin: auto;
     overflow: hidden;
     position: relative;
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
+    margin-top: 20px; /* Уменьшаем верхний отступ */
+    margin-bottom: 10px; /* Уменьшаем нижний отступ */
+    
 }
 
 .carousel {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    width: 100%;
-    gap: 0; /* Убираем промежутки между элементами */
 }
 
 .carousel-item {
-    flex: 0 0 100%; /* Устанавливаем одинаковую ширину для всех слайдов */
-    max-width: 100%; /* Обеспечиваем, чтобы слайды не выходили за пределы контейнера */
+    flex: 0 0 100%;
     text-align: center;
-    overflow: hidden;
     background: #222;
     border-radius: 10px;
-    margin: 0; /* Убираем маргин, чтобы избежать различий в расстоянии */
-    padding-bottom: 1%
+    padding-bottom: 1%;
+    padding: 0;
+    margin: 0; /* Убираем внешние отступы */
 }
 
 .carousel-item img {
@@ -200,6 +183,8 @@ body {
     height: 600px;
     object-fit: cover;
     border-radius: 10px;
+    margin-bottom: 5px;
+    display: block;
 }
 
 /* Кнопки карусели */
@@ -215,26 +200,27 @@ body {
     z-index: 10;
 }
 
-.prev {
-    left: 10px;
-}
-
-.next {
-    right: 10px;
-}
+.prev { left: 10px; }
+.next { right: 10px; }
 
 .carousel-btn:hover {
     background: rgba(0, 0, 0, 0.7);
 }
 
-@media (max-width: 768px) {  
-    .carousel-item img {  
-        width: 100%; /* Изображение займет всю ширину карусели */  
-        height: auto; /* Автоматическая высота для сохранения пропорций */  
-        max-height: 250px; /* Можно задать максимальную высоту, чтобы не было слишком больших изображений */  
-    }  
-}  
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .nav {
+        width: 100%;
+        left: 0;
+        text-align: center;
+    }
 
+    .nav a {
+        width: 100%;
+        padding: 10px 0;
+        display: block;
+    }
+}
 
 /* Почему мы? */
 .why-us {
@@ -393,23 +379,31 @@ footer {
     .footer-contacts li {
         font-size: 14px;
     }
+    .carousel-item img {
+        height: 300px; /* Уменьшаем высоту изображений */
+        width: auto; /* Поддерживаем пропорции */
+    }
+    
+    .carousel-btn {
+        width: 40px; /* Уменьшаем ширину кнопки */
+        height: 40px; /* Уменьшаем высоту кнопки */
+        font-size: 14px; /* Делаем иконку кнопки меньше */
+        padding: 5px;
+    }
+
+    .prev { 
+        left: 5px; /* Двигаем кнопку левее */
+    }
+    
+    .next { 
+        right: 5px; /* Двигаем кнопку правее */
+    }
+
+    .carousel-item img {
+        height: 250px; /* Еще уменьшаем высоту */
+        width: 100%; /* Чтобы не ломалась адаптивность */
+        object-fit: contain; /* Изображения не обрезаются */
+    }
+
+    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,23 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Скрипт загружен");
 
-    // === КНОПКА ЗАПИСИ ===
-    const bookingButton = document.querySelector('.hero .btn');
-    if (bookingButton) {
-        console.log("Кнопка записи найдена");
-        bookingButton.addEventListener("click", showAlert);
-    } else {
-        console.error("Кнопка записи не найдена!");
+    // === КНОПКИ "ЗАПИСЬ" ===
+    function showAlert() {
+        alert("Функция записи еще не реализована");
     }
 
-    function showAlert() {
-        const lang = document.documentElement.lang || 'ru';
-        if (typeof translations === 'undefined' || !translations[lang]) {
-            console.error("Ошибка: объект translations не найден или не поддерживает язык", lang);
-            return;
-        }
-        alert(translations[lang].alerts.booking);
-    }
+    // Находим все кнопки "Запись" и добавляем обработчик
+    const bookingButtons = document.querySelectorAll(".btn[data-translate='booking']");
+    bookingButtons.forEach(button => {
+        button.addEventListener("click", showAlert);
+    });
 
     // === КАРУСЕЛЬ ===
     const carousel = document.querySelector(".carousel");
@@ -28,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let index = 0;
 
     function updateCarousel() {
-        const slideWidth = slides[0].offsetWidth; // Получаем ширину слайда
+        const slideWidth = slides[0]?.offsetWidth || 0;
         carousel.style.transform = `translateX(-${index * slideWidth}px)`;
     }
 
@@ -45,23 +38,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (prevButton && nextButton) {
         prevButton.addEventListener("click", prevSlide);
         nextButton.addEventListener("click", nextSlide);
-    } else {
-        console.error("Кнопки карусели не найдены!");
     }
 
-    setInterval(nextSlide, 5000); // Автопрокрутка каждые 5 секунд
-
-    function resizeCarousel() {
-        const screenWidth = window.innerWidth;
-        slides.forEach(slide => {
-            const img = slide.querySelector("img");
-            img.style.width = screenWidth < 768 ? "100vw" : "300px";
-        });
-        updateCarousel();
-    }
-
-    window.addEventListener("resize", resizeCarousel);
-    resizeCarousel();
+    setInterval(nextSlide, 5000);
+    window.addEventListener("resize", updateCarousel);
+    updateCarousel();
 
     // === БУРГЕР-МЕНЮ ===
     const burger = document.querySelector(".hamburger-btn");
@@ -71,8 +52,12 @@ document.addEventListener("DOMContentLoaded", function () {
         burger.addEventListener("click", function () {
             nav.classList.toggle("show");
         });
-    } else {
-        console.error("Бургер-меню не найдено!");
+
+        document.addEventListener("click", (e) => {
+            if (!burger.contains(e.target) && !nav.contains(e.target)) {
+                nav.classList.remove("show");
+            }
+        });
     }
 
     // === СМЕНА ЯЗЫКА ===
@@ -80,20 +65,26 @@ document.addEventListener("DOMContentLoaded", function () {
     if (languageSelect) {
         languageSelect.addEventListener("change", function () {
             const selectedLanguage = languageSelect.value;
-            document.documentElement.lang = selectedLanguage;
-            changeLanguage(selectedLanguage);
+            localStorage.setItem("lang", selectedLanguage);
+            location.reload();
         });
-    } else {
-        console.error("Не найден элемент выбора языка!");
+
+        const savedLang = localStorage.getItem("lang") || "ru";
+        languageSelect.value = savedLang;
     }
 
-    function changeLanguage(language) {
-        const translationElements = document.querySelectorAll("[data-translate]");
-        translationElements.forEach(element => {
-            const key = element.getAttribute("data-translate");
-            if (translations[language] && translations[language][key]) {
-                element.textContent = translations[language][key];
-            }
-        });
-    }
+    // === ДОПОЛНИТЕЛЬНЫЕ НАСТРОЙКИ ===
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        },
+        { threshold: 0.3 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
 });
