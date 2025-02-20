@@ -48,6 +48,17 @@ document.addEventListener("DOMContentLoaded", function () {
         currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
         updateCarousel();
     }
+     document.addEventListener("DOMContentLoaded", function () {
+        const wrapper = document.querySelector(".carousel-wrapper");
+        const slides = document.querySelectorAll(".slide");
+        let index = 0;
+        
+        function nextSlide() {
+            index = (index + 1) % slides.length;  
+            wrapper.style.transform = `translateX(-${index * 300}px)`;
+        }
+
+        setInterval(nextSlide, 10000);
     
     // Привязка кнопок управления каруселью
     if (prevButton && nextButton) {
