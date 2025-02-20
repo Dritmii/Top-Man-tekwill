@@ -58,25 +58,58 @@ body {
 }
 
 /* Бургер-меню */
+/* Основной стиль для бургер-меню */
 .hamburger-btn {
+    display: flex;        /* Включаем флекс-контейнер */
+    flex-direction: column; 
+    gap: 5px;             /* Расстояние между линиями */
     background: transparent;
     border: none;
     cursor: pointer;
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    padding: 5px;
-    z-index: 15;
-    position: absolute;
-    right: 15px;
-    top: 10px;
 }
 
 .hamburger-icon {
-    width: 25px;
-    height: 4px;
-    background-color: white;
+    width: 25px;          /* Ширина линии */
+    height: 3px;          /* Толщина линии */
+    background-color: #fff; /* Цвет линии (белый) */
     transition: all 0.3s ease;
+    display: block;       /* Чтобы каждая линия была на своей строке */
+}
+
+/* Навигационное меню */
+.nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    transform: translateX(100%); /* скрыть меню за экран */
+    transition: transform 0.3s ease, max-height 0.5s ease; /* плавная анимация */
+    z-index: 1000;
+}
+
+/* Когда класс 'show' добавляется, меню должно быть видно */
+.nav.show {
+    transform: translateX(0); /* показываем меню */
+}
+
+/* Стили для ссылок внутри меню */
+.nav ul {
+    list-style: none;
+    padding: 20px;
+    margin: 0;
+}
+
+.nav li {
+    margin-bottom: 20px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
 }
 
 /* Мобильное меню */
@@ -97,7 +130,7 @@ body {
 
     /* Когда класс show добавлен, меню отображается */
     .nav.show {
-        display: flex;
+        display: block;
     }
 
     /* Бургер-меню отображается только на мобильных */
@@ -415,3 +448,4 @@ footer {
 
     
 }
+

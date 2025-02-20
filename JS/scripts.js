@@ -1,39 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Скрипт загружен");
-  
+
     const burger = document.querySelector(".hamburger-btn");
     const nav = document.querySelector(".nav");
-  
-    // Проверка на наличие элементов на странице
+    const navLinks = document.querySelectorAll(".nav a"); // Получаем все ссылки в меню
+
+    // Проверка на существование элементов
     if (burger && nav) {
-      // Слушатель нажатия на бургер-меню
-      burger.addEventListener("click", function (event) {
-        event.stopPropagation(); // Останавливаем всплытие, чтобы не сработал click вне меню
-        nav.classList.toggle("show"); // Переключаем класс show
-      });
-  
-      // Закрытие меню при клике вне бургер-меню или навигации
-      document.addEventListener("click", function (event) {
-        if (!burger.contains(event.target) && !nav.contains(event.target)) {
-          nav.classList.remove("show"); // Убираем класс show, если клик не по бургеру или меню
-        }
-      });
-    }
-  
-    burger.addEventListener("click", function (event) {
-        console.log("Бургер кликнут");
-        event.stopPropagation(); // Останавливаем всплытие, чтобы не сработал click вне меню
-        nav.classList.toggle("show"); // Переключаем класс show
-    });
-    
-    if (burger && nav) {
+        // Обработчик для открытия и закрытия меню
         burger.addEventListener("click", function (event) {
-            event.stopPropagation();
-            nav.classList.toggle("show");
+            event.stopPropagation(); // Останавливаем всплытие события
+            nav.classList.toggle("show"); // Переключаем класс show
             console.log(nav.classList.contains("show") ? "Меню открыто" : "Меню закрыто");
         });
+
+        // Закрытие меню при клике вне бургер-меню или навигации
+        document.addEventListener("click", function (event) {
+            if (!burger.contains(event.target) && !nav.contains(event.target)) {
+                nav.classList.remove("show"); // Убираем класс show, если клик не по бургеру или меню
+            }
+        });
+
+        // Закрытие меню при клике на любую ссылку
+        navLinks.forEach(link => {
+            link.addEventListener("click", function () {
+                nav.classList.remove("show"); // Закрываем меню
+            });
+        });
     }
-        
 
     // === КНОПКИ "ЗАПИСЬ" ===
     function showAlert() {
