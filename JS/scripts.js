@@ -91,8 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     entry.target.classList.add("visible");
                 }
             });
-        },
-        { threshold: 0.3 }
+        }, {
+            threshold: 0.3
+        }
     );
 
     sections.forEach((section) => observer.observe(section));
