@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,10 +27,10 @@
         <!-- Меню -->
         <nav class="nav" id="navMenu">
             <a href="index.html" data-translate="home">Главная</a>
-            <a href="#services" data-translate="services">Услуги</a>
+            <a href="pages/services.html" data-translate="services">Услуги</a>
             <a href="pages/about.html" data-translate="about">О нас</a>
             <a href="#contact" data-translate="contacts">Контакты</a>
-            
+
             <!-- Выбор языка -->
             <div class="language-selector">
                 <select id="languageSelect">
@@ -40,39 +41,38 @@
             </div>
         </nav>
     </header>
-    
+
 
     <main>
         <div class="hero">
             <div class="overlay">
                 <h1 data-translate="slogan">"Стильный уход для джентльменов"</h1>
-                <button class="btn" data-translate="booking" onclick="showAlert()">Запись</button>
             </div>
         </div>
-    
+
         <section id="services" class="carousel-container">
             <button class="carousel-btn prev">&#10094;</button>
             <button class="carousel-btn next">&#10095;</button>
-    
-            <div class="carousel" >
+
+            <div class="carousel">
                 <div class="carousel-item">
                     <img src="img/image 32.png" alt="Фото 1">
                     <p data-translate="haircut">Стрижка от 200 лей</p>
-                    <button class="btn" data-translate="booking">Запись</button>
+                    <button class="btn" data-translate="booking" href="pages/services.html">Запись</button>
                 </div>
                 <div class="carousel-item">
                     <img src="img/istockphoto-1185955900-612x612 1.png" alt="Фото 2">
                     <p data-translate="beard">Оформление бороды от 160 лей</p>
-                    <button class="btn" data-translate="booking">Запись</button>
+                    <button class="btn" data-translate="booking" href="pages/services.html">Запись</button>
                 </div>
                 <div class="carousel-item">
                     <img src="img/image 35.png" alt="Фото 3">
                     <p data-translate="waxing">Ваксинг от 100 лей</p>
-                    <button class="btn" data-translate="booking">Запись</button>
+                    <button class="btn" data-translate="booking" href="pages/services.html">Запись</button>
                 </div>
             </div>
         </section>
-    
+
         <section id="why-us" class="why-us">
             <div class="why-us-container">
                 <div class="why-us-text">
@@ -110,33 +110,35 @@
                 <h3 data-translate="contacts">Контакты</h3>
                 <ul>
                     <li class="contact-item">
-                        <img src="img/Телефон.svg" alt="Телефон"> 
+                        <img src="img/Телефон.svg" alt="Телефон">
                         <a href="tel:+37361111189">+373 (61) 111 189</a>
                     </li>
                     <li class="contact-item">
-                        <img src="img/Локация.svg" alt="Адрес"> 
-                        <a href="https://maps.app.goo.gl/9taKbz49qYcP1yCP8" target="_blank" data-translate="address">Balti, Alexandru cel Bun 40a</a>
+                        <img src="img/Локация.svg" alt="Адрес">
+                        <a href="https://maps.app.goo.gl/9taKbz49qYcP1yCP8" target="_blank"
+                            data-translate="address">Balti, Alexandru cel Bun 40a</a>
                     </li>
                     <li class="contact-item">
-                        <img src="img/Telegram.svg" alt="Telegram"> 
+                        <img src="img/Telegram.svg" alt="Telegram">
                         <a href="https://t.me/topmanbarbershop1" target="_blank">Telegram: @topmanbarbershop1</a>
                     </li>
                     <li class="contact-item">
-                        <img src="img/Instagram.svg" alt="Instagram"> 
-                        <a href="https://www.instagram.com/barbershoptopman_/" target="_blank">Instagram: barbershoptopman_</a>
+                        <img src="img/Instagram.svg" alt="Instagram">
+                        <a href="https://www.instagram.com/barbershoptopman_/" target="_blank">Instagram:
+                            barbershoptopman_</a>
                     </li>
                 </ul>
             </div>
-        </div>      
-    <div class="footer-text">
-        <p  data-translate="projectNote" > Сайт сделан в рамках проекта Tekwill </p> 
-        <p>© 2025 Top Man Barbershop</p>
-    </div>
-</footer>
-    
+        </div>
+        <div class="footer-text">
+            <p data-translate="projectNote"> Сайт сделан в рамках проекта Tekwill </p>
+            <p>© 2025 Top Man Barbershop</p>
+        </div>
+    </footer>
 
-<script src="JS/scripts.js"></script>
-<script src="JS/scripts_translate.js"></script>
+
+    <script src="JS/scripts.js"></script>
+    <script src="JS/scripts_translate.js"></script>
 </body>
-</html>
 
+</html>
