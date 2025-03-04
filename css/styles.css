@@ -1,822 +1,824 @@
-/* Основные стили */
+/* =====================================
+   Основные переменные
+===================================== */
+:root {
+  --font-family: "JetBrains Mono", sans-serif;
+  --primary-bg: #121212;
+  --secondary-bg: #111;
+  --primary-color: white;
+  --accent-color: #FFCC6D;
+  --light-color: #EBEBEB;
+  --dark-color: #1e1e1e;
+}
+
+/* =====================================
+ Основные стили
+===================================== */
 body {
-    margin: 0;
-    font-family: "JetBrains Mono", sans-serif;
-    background-color: #111;
-    color: white;
-    overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background-color: var(--primary-bg);
+  color: var(--primary-color);
+  overflow-x: hidden;
 }
 
-/* Шапка */
+/* =====================================
+ Шапка и навигация
+===================================== */
 .header {
-    width: 100%;
-    max-width: 100vw;
-    padding: 10px 15px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  max-width: 100vw;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Логотип */
 .logo img {
-    height: 50px;
-    max-width: 100%;
+  height: 50px;
+  max-width: 100%;
 }
 
-/* Меню */
 .nav {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    transition: all 0.3s ease-in-out;
-    width: auto;
-    
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  z-index: 1000;
+  transition: transform 0.3s ease, max-height 0.5s ease;
+  width: auto;
 }
 
-.nav a, .footer-contacts a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    white-space: nowrap; /* Блокируем перенос текста */
+.nav a,
+.footer-contacts a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 /* Языковой переключатель */
 .language-selector select {
-    background-color: #222;
-    color: white;
-    border: 1px solid #444;
-    padding: 8px 25px 8px 10px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s, border-color 0.3s;
+  background-color: #222;
+  color: var(--primary-color);
+  border: 1px solid #444;
+  padding: 8px 25px 8px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
 }
-
 .language-selector select:hover {
-    background-color: #333;
+  background-color: #333;
 }
 
 /* Бургер-меню */
-/* Основной стиль для бургер-меню */
 .hamburger-btn {
-    display: none;        /* Включаем флекс-контейнер */
-    flex-direction: column; 
-    gap: 5px;             /* Расстояние между линиями */
-    background: transparent;
-    border: none;
-    cursor: pointer;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
-
 .hamburger-icon {
-    width: 25px;          /* Ширина линии */
-    height: 3px;          /* Толщина линии */
-    background-color: #fff; /* Цвет линии (белый) */
-    transition: all 0.3s ease;
-    display: block;       /* Чтобы каждая линия была на своей строке */
-}
-
-/* Навигационное меню */
-
-.nav {
-    display: flex; /* Меню всегда флекс, и оно будет видно на больших экранах */
-    gap: 20px;
-    align-items: center;
-    z-index: 1000;
-    transition: transform 0.3s ease, max-height 0.5s ease; /* плавная анимация */
-}
-
-/* Когда класс 'show' добавляется, меню должно быть видно */
-.nav.show {
-    transform: translateX(0); /* показываем меню */
-}
-
-/* Стили для ссылок внутри меню */
-.nav ul {
-    list-style: none;
-    padding: 20px;
-    margin: 0;
-}
-
-.nav li {
-    margin-bottom: 20px;
-}
-
-.nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
+  width: 25px;
+  height: 3px;
+  background-color: var(--primary-color);
+  transition: all 0.3s ease;
+  display: block;
 }
 
 /* Мобильное меню */
 @media (max-width: 768px) {
-    .nav {
-        display: none; /* Скрываем меню по умолчанию на мобильных */
-        position: absolute;
-        top: 60px; /* Отступ сверху, если нужно */
-        left: 0;
-        width: 100%;
-        background-color: black;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        padding: 20px 0;
-    }
-
-    /* Показываем меню, когда оно открыто */
-    .nav.show {
-        display: block;
-    }
-
-    .nav a {
-        width: 100%;
-        padding: 10px 0;
-        display: block;
-        text-align: center;
-    }
-
-    /* Показывать бургер-меню только на мобильных */
-    .hamburger-btn {
-        display: flex; /* Показываем на мобильных устройствах */
-    }
+  .nav {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background-color: black;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 0;
+  }
+  .nav.show {
+      display: block;
+  }
+  .nav a {
+      width: 100%;
+      padding: 10px 0;
+      display: block;
+      text-align: center;
+  }
+  .hamburger-btn {
+      display: flex;
+  }
 }
 
-/* Герой секция */
+/* =====================================
+ Герой секция
+===================================== */
 .hero {
-    background: url('../img/image1.png') no-repeat center center/cover;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: relative;
+  background: url('../img/image1.png') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
 }
-
 .overlay {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    border-radius: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;
 }
-
 .hero-title {
-    position: absolute;
-    top: 20%;
-    left: 5%;
-    font-size: 40px;
-    font-weight: bold;
-    max-width: 90vw;
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  font-size: 40px;
+  font-weight: bold;
+  max-width: 90vw;
 }
 
-/* Кнопки */
+/* =====================================
+ Кнопки
+===================================== */
 .btn {
-    background: #d4a373;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 18px;
-    border-radius: 5px;
-    transition: 0.3s;
+  background: #d4a373;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 5px;
+  transition: 0.3s;
 }
-
 .btn:hover {
-    background: #b5835a;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  background: #b5835a;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-/* Карусель */
+/* =====================================
+ Карусель
+===================================== */
 .carousel-container {
-    width: 80%;
-    max-width: 900px;
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-    margin-top: 20px; /* Уменьшаем верхний отступ */
-    margin-bottom: 10px; /* Уменьшаем нижний отступ */
-    
+  width: 80%;
+  max-width: 900px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
-
 .carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+  display: flex;
+  transition: transform 0.5s ease-in-out;
 }
-
 .carousel-item {
-    flex: 0 0 100%;
-    text-align: center;
-    background: #222;
-    border-radius: 10px;
-    padding-bottom: 1%;
-    padding: 0;
-    margin: 0; /* Убираем внешние отступы */
-    padding-bottom: 1%
+  flex: 0 0 100%;
+  text-align: center;
+  background: #222;
+  border-radius: 10px;
+  margin: 0;
 }
-
 .carousel-item img {
-    width: 100%;
-    height: 600px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 5px;
-    display: block;
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  display: block;
 }
-
-/* Кнопки карусели */
 .carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
 }
-
 .prev { left: 10px; }
 .next { right: 10px; }
-
 .carousel-btn:hover {
-    background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7);
 }
 
-/* Мобильная версия */
-@media (max-width: 768px) {
-    .nav {
-        width: 100%;
-        left: 0;
-        text-align: center;
-    }
-
-    .nav a {
-        width: 100%;
-        padding: 10px 0;
-        display: block;
-    }
-}
-
-/* Почему мы? */
+/* =====================================
+ Почему мы? и Команда
+===================================== */
 .why-us {
-    padding: 50px;
-    background-color: #111;
-    color: white;
-    text-align: center;
+  padding: 50px;
+  background-color: #111;
+  color: white;
+  text-align: center;
 }
-
 .why-us-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    max-width: 1200px;
-    margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
 }
-
-.why-us-text, .why-us-image {
-    flex: 1;
-    min-width: 300px;
-    padding: 20px;
+.why-us-text,
+.why-us-image {
+  flex: 1;
+  min-width: 300px;
+  padding: 20px;
 }
-
 .why-us-image img {
-    max-width: 100%;
-    border-radius: 10px;
+  max-width: 100%;
+  border-radius: 10px;
 }
-
-/* Секционные стили */
 .container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
 }
-
 .heroabout {
-    position: relative;
+  position: relative;
 }
-
 .heroabout img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
-
 .section {
-    margin: 50px 0;
-    text-align: left;
+  margin: 50px 0;
+  text-align: left;
 }
-
 .section h2 {
-    color: #ffb100;
-    font-size: 32px;
-    margin-bottom: 20px;
+  color: #ffb100;
+  font-size: 32px;
+  margin-bottom: 20px;
 }
 
 /* Команда */
 .team {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
-
 .team-member {
-    background: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 200px;
-    margin: 10px;
+  background: var(--dark-color);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 200px;
+  margin: 10px;
 }
-
 .team-member img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: #ccc;
-    margin-bottom: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #ccc;
+  margin-bottom: 10px;
 }
 
-/* Подвал */
+/* =====================================
+ Подвал
+===================================== */
 footer {
-    background-color: black;
-    padding: 20px;
+  background-color: black;
+  padding: 20px;
 }
-
 .footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-
-/* Логотип */
 .footer-logo img {
-    width: 150px;
+  width: 150px;
 }
-
-/* Блоки футера */
 .footer-services,
 .footer-contacts {
-    flex: 1;
-    text-align: center;
+  flex: 1;
+  text-align: center;
 }
-
 .footer-services h3,
 .footer-contacts h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
-
 .footer-services ul,
 .footer-contacts ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
-
 .footer-services li,
 .footer-contacts li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 5px;
 }
-
-/* Центрирование текста в футере */
 .footer-text {
-    text-align: center;
-    font-size: 14px;
-    color: white;
-    margin: 0;
+  text-align: center;
+  font-size: 14px;
+  color: white;
+  margin: 0;
 }
 
 /* Мобильная версия футера */
 @media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 20px;
-    }
-
-    .footer-logo img {
-        width: 120px;
-    }
-
-    .footer-services h3,
-    .footer-contacts h3 {
-        font-size: 16px;
-    }
-
-    .footer-services li,
-    .footer-contacts li {
-        font-size: 14px;
-    }
-    .carousel-item img {
-        height: 300px; /* Уменьшаем высоту изображений */
-        width: auto; /* Поддерживаем пропорции */
-    }
-    
-    .carousel-btn {
-        width: 40px; /* Уменьшаем ширину кнопки */
-        height: 40px; /* Уменьшаем высоту кнопки */
-        font-size: 14px; /* Делаем иконку кнопки меньше */
-        padding: 5px;
-    }
-
-    .prev { 
-        left: 5px; /* Двигаем кнопку левее */
-    }
-    
-    .next { 
-        right: 5px; /* Двигаем кнопку правее */
-    }
-
-    .carousel-item img {
-        height: 250px; /* Еще уменьшаем высоту */
-        width: 100%; /* Чтобы не ломалась адаптивность */
-        object-fit: contain; /* Изображения не обрезаются */
-    }
-
-    
+  .footer-container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+  }
+  .footer-logo img {
+      width: 120px;
+  }
+  .footer-services h3,
+  .footer-contacts h3 {
+      font-size: 16px;
+  }
+  .footer-services li,
+  .footer-contacts li {
+      font-size: 14px;
+  }
+  .carousel-item img {
+      height: 300px;
+      width: auto;
+  }
+  .carousel-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 14px;
+      padding: 5px;
+  }
+  .prev { left: 5px; }
+  .next { right: 5px; }
+  .carousel-item img {
+      height: 250px;
+      width: 100%;
+      object-fit: contain;
+  }
 }
 
+/* =====================================
+ Фото и заголовок
+===================================== */
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 650px;
+  overflow: hidden;
+}
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.image-container h1 {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+}
 
+/* =====================================
+ Навигация по этапам
+===================================== */
+.steps {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  margin: 30px 0 20px 40px;
+  justify-content: flex-start;
+}
+.step {
+  color: #D9D9D9;
+  cursor: pointer;
+}
+.step.active {
+  color: white;
+  font-weight: bold;
+}
+.step::after {
+  content: " → ";
+  color: #D9D9D9;
+}
+.step:last-child::after {
+  content: "";
+}
 
-/* Общие стили */
-body {
-    font-family: 'JetBrains Mono', monospace;
-    background-color: #121212;
-    color: white;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Фото */
-  .image-container {
-    position: relative;
-    width: 100%;
-    height: 650px;
-    overflow: hidden;
-  }
-  .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .image-container h1 {
-    position: absolute;
-    top: 20%;
-    left: 5%;
-    font-size: 48px;
-    font-weight: bold;
-    color: white;
-  }
-  
-  /* Навигация по этапам (выравнена по левому краю) */
-  .steps {
-    display: flex;
-    gap: 10px;
-    font-size: 14px;
-    margin: 30px 0 20px 40px;
-    justify-content: flex-start;
-  }
-  .step {
-    color: #D9D9D9;
-    cursor: pointer;
-  }
-  .step.active {
-    color: white;
-    font-weight: bold;
-  }
-  .step::after {
-    content: " → ";
-    color: #D9D9D9;
-  }
-  .step:last-child::after {
-    content: "";
-  }
-  
-  /* Выбор барбера */
-  .barber-selection {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
-    animation: fadeIn 0.3s ease-in-out;
-  }
-  .barber-btn {
-    background-color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-  }
-  .barber-btn.active {
-    background-color: #FFCC6D;
-  }
-  
-  /* Информация о барбере */
-  .barber-info {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
-    margin-bottom: 20px;
-    padding-left: 20px;
-  }
-  .barber-photo {
-    width: 50px;
-    height: 50px;
-    background: gray;
-    border-radius: 50%;
-  }
-  
-  /* Основной контент: Flex-контейнер для этапов */
-  .main-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 30px;
-    gap: 20px;
-    flex-wrap: nowrap;
-  }
-  
-  /* Услуги */
-  .services-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 60px;
-    width: 70%;
-    justify-items: center;
-    margin-bottom: 50px;
-  }
-  .service-card {
-    background-color: #F0E6D2;
-    color: black;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    cursor: pointer;
-    width: 247.63px;
-    height: 146.2px;
-    transition: transform 0.3s;
-  }
-  .service-card:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Меню заказа (для этапов 1,2 и 3) */
-  .order-menu {
-    background-color: #EBEBEB;
-    color: black;
-    padding: 15px;
-    border-radius: 10px;
-    width: auto;
-    height: auto;
-    margin-top: 30px;
-    margin-right: 20px;
-  }
-  .order-menu h2 {
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  .order-list {
-    list-style: none;
-    padding: 0;
-  }
-  .order-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-  .remove-btn {
-    background: none;
-    border: none;
-    color: red;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  .total-price {
-    font-weight: bold;
-    text-align: center;
-    margin: 15px 0;
-  }
-  .order-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #FFCC6D;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  /* Блок с информацией о дате и времени в шаге 3 */
-  .order-menu-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Убираем фиксированную ширину, чтобы не сжималось меню */
-    margin-top: 30px;
-    margin-right: 20px;
-  }
-  .order-summary {
-    background-color: #EBEBEB;
-    color: black;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  .order-summary p {
-    margin: 5px 0;
-    text-align: center;
-    font-size: 16px;
-  }
-  
-  /* Личные данные (шаг 3) */
-  .personal-data-content {
-    width: 70%;
-    margin-top: -20px;
-    margin-left: 20px;
-  }
-  .personal-data-content h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    padding-left: 20px;
-  }
-  .personal-data-content form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 400px;
-  }
-  .personal-data-content label {
-    font-size: 16px;
-  }
-  .personal-data-content input {
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  /* Шаг 4: Подтверждение */
-  .confirmation-content {
-    text-align: center;
-    padding: 40px;
-  }
-  #finalSummary {
-    list-style: none;
-    padding: 0;
-    margin: 20px auto;
-    max-width: 400px;
-    text-align: left;
-  }
-  #finalSummary li {
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-  
-  /* Скрытие элементов */
-  .hidden {
-    display: none;
-  }
-  
-  /* Блок выбора времени (для шага 2) */
-  .time-selection-content {
-    width: 70%;
-    margin-top: -20px;
-    margin-left: 20px;
-  }
-  #timeSelection h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    padding-left: 20px;
-  }
-  .calendar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  .calendar-dates .month {
-    font-size: 24px;
-    color: #D9D9D9;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  .dates-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .date-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .date-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .date-btn.current-week {
-    background-color: #D9D9D9;
-    color: black;
-  }
-  .date-btn.next-week {
-    background-color: #000;
-    color: white;
-  }
-  .date-btn.active {
-    border: 2px solid #FFCC6D;
-  }
-  .date-btn:hover {
-    background-color: #f0f0f0;
-  }
-  .day-label {
-    margin-top: 5px;
-    font-size: 14px;
-    color: #D9D9D9;
-  }
-  
-  /* Выбор времени (слоты) */
-  .time-slots {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
-    margin: 20px auto;
-    padding: 0 40px;
-    max-width: 900px;
-  }
-  .time-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    max-width: 130px;
-    padding: 18px 12px;
-    font-size: 20px;
-    font-family: 'JetBrains Mono', monospace;
-    background: #f5f3eb;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-  }
-  .time-btn img {
-    width: 22px;
-    height: 22px;
-  }
-  .time-btn:hover {
-    transform: scale(1.07);
-    background-color: #E6DFD0;
-  }
-  .time-btn.active {
-    background: #f0c040;
-  }
-  .time-icon {
-    width: 18px;
-    height: 18px;
-  }
-  
-  /* Анимация появления */
-  .fade-in {
-    animation: fadeIn 0.3s ease-in-out forwards;
-  }
-  @keyframes fadeIn {
-    from {
+/* =====================================
+ Выбор барбера и информация о барбере
+===================================== */
+.barber-selection {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+  animation: fadeIn 0.3s ease-in-out;
+}
+.barber-btn {
+  background-color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+.barber-btn.active {
+  background-color: var(--accent-color);
+}
+.barber-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+.barber-photo {
+  width: 50px;
+  height: 50px;
+  background: gray;
+  border-radius: 50%;
+}
+
+/* =====================================
+ Основной контент (этапы)
+===================================== */
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 30px;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+/* =====================================
+ Услуги
+===================================== */
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  width: 70%;
+  justify-items: center;
+  margin-bottom: 50px;
+}
+.service-card {
+  background-color: #F0E6D2;
+  color: black;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  width: 247.63px;
+  height: 146.2px;
+  transition: transform 0.3s;
+}
+.service-card:hover {
+  transform: scale(1.05);
+}
+
+/* =====================================
+ Меню заказа
+===================================== */
+.order-menu {
+  background-color: var(--light-color);
+  color: black;
+  padding: 15px;
+  border-radius: 10px;
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  margin-top: 30px;
+  margin-right: 20px;
+}
+.order-menu h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.order-list {
+  list-style: none;
+  padding: 0;
+}
+.order-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.remove-btn {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 16px;
+}
+.total-price {
+  font-weight: bold;
+  text-align: center;
+  margin: 15px 0;
+}
+.order-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--accent-color);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* =====================================
+ Блок с информацией о дате и времени (шаг 3)
+===================================== */
+.order-menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  margin-right: 20px;
+}
+.order-summary {
+  background-color: var(--light-color);
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.order-summary p {
+  margin: 5px 0;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* =====================================
+ Личные данные (шаг 3)
+===================================== */
+.personal-data-content {
+  width: 70%;
+  margin-top: -20px;
+  margin-left: 20px;
+}
+.personal-data-content h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+.personal-data-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+}
+.personal-data-content label {
+  font-size: 16px;
+}
+.personal-data-content input {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+}
+
+/* =====================================
+ Шаг 4: Подтверждение
+===================================== */
+.confirmation-content {
+  text-align: center;
+  padding: 40px;
+}
+#finalSummary {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  max-width: 400px;
+  text-align: left;
+}
+#finalSummary li {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+/* =====================================
+ Скрытие элементов
+===================================== */
+.hidden {
+  display: none;
+}
+
+/* =====================================
+ Блок выбора времени (шаг 2)
+===================================== */
+.time-selection-content {
+  width: 70%;
+  margin-top: -20px;
+  margin-left: 20px;
+}
+#timeSelection h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.calendar-dates .month {
+  font-size: 24px;
+  color: #D9D9D9;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.dates-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.date-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.date-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.date-btn.current-week {
+  background-color: #D9D9D9;
+  color: black;
+}
+.date-btn.next-week {
+  background-color: #000;
+  color: white;
+}
+.date-btn.active {
+  border: 2px solid var(--accent-color);
+}
+.date-btn:hover {
+  background-color: #f0f0f0;
+}
+.day-label {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #D9D9D9;
+}
+
+/* =====================================
+ Выбор времени (слоты)
+===================================== */
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  padding: 0 40px;
+  max-width: 900px;
+}
+.time-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 130px;
+  padding: 18px 12px;
+  font-size: 20px;
+  font-family: var(--font-family);
+  background: #f5f3eb;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.time-btn img {
+  width: 22px;
+  height: 22px;
+}
+.time-btn:hover {
+  transform: scale(1.07);
+  background-color: #E6DFD0;
+}
+.time-btn.active {
+  background: #f0c040;
+}
+.time-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* =====================================
+ Анимация появления
+===================================== */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+@keyframes fadeIn {
+  from {
       opacity: 0;
       transform: translateY(10px);
-    }
-    to {
+  }
+  to {
       opacity: 1;
       transform: translateY(0);
-    }
   }
-  
-  order-menu {
-    width: 250px; /* Установите фиксированную ширину */
-    min-width: 250px; /* Минимальная ширина */
-    max-width: 250px; /* Максимальная ширина */
-    height: auto;
+}
+
+/* =====================================
+ Адаптивность
+===================================== */
+/* Мобильная версия (до 768px) */
+@media (max-width: 768px) {
+  .main-content {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
   }
-  
+  .services-container {
+      grid-template-columns: 1fr;
+      width: 90%;
+      margin: 0 auto;
+      gap: 20px;
+  }
+  .order-menu {
+      width: 90%;
+      margin: 20px auto;
+  }
+}
+
+/* Планшетная версия (от 769px до 1280px) */
+@media (min-width: 769px) and (max-width: 1280px) {
+  .main-content {
+      flex-wrap: wrap;
+      gap: 20px;
+  }
+  .services-container {
+      grid-template-columns: repeat(2, 1fr);
+      width: 65%;
+      margin: 0 auto;
+      gap: 30px;
+  }
+  .order-menu {
+      width: 30%;
+      margin: 20px auto 40px;
+  }
+}
+
+/* Time-slots: до 1024px – 4 колонки, до 768px – 2 колонки */
+@media (max-width: 1024px) {
+  .time-slots {
+      grid-template-columns: repeat(4, 1fr);
+      padding: 0 20px;
+  }
+}
+@media (max-width: 768px) {
+  .time-slots {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 10px;
+  }
+}
+
+/* Дополнительная адаптивность для order-menu */
+@media (max-width: 1024px) {
+  .order-menu {
+      padding: 15px;
+      gap: 15px;
+      min-width: 200px;
+      justify-content: space-around;
+  }
+}
+@media (max-width: 768px) {
+  .order-menu {
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px;
+      min-width: 180px;
+  }
+}
