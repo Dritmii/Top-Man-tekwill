@@ -1,822 +1,972 @@
-/* Основные стили */
-body {
-    margin: 0;
-    font-family: "JetBrains Mono", sans-serif;
-    background-color: #111;
-    color: white;
-    overflow-x: hidden;
+/* Обновление стилей для кнопок выбора услуги */
+.service-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  /* Позволяет кнопкам переноситься на новую строку */
+  gap: 10px;
+  /* Отступ между кнопками */
+  justify-content: center;
+  /* Центрирование кнопок */
 }
 
-/* Шапка */
+.service-buttons button {
+  flex: 1 1 calc(50% - 10px);
+  /* Две кнопки в строке с учетом отступов */
+  max-width: calc(50% - 10px);
+  /* Ограничение ширины */
+}
+
+@media (max-width: 768px) {
+  .service-buttons button {
+    flex: 1 1 100%;
+    /* Одна кнопка в строке на маленьких экранах */
+    max-width: 100%;
+  }
+}
+
+/* Убираем фиксированное позиционирование у меню заказа */
+.order-menu {
+  margin-top: 20px;
+  /* Отступ сверху для визуального разделения */
+  position: static;
+  /* Меню перемещается вниз при уменьшении ширины */
+}
+
+@media (max-width: 768px) {
+  .order-menu {
+    margin-top: 10px;
+    /* Меньший отступ на маленьких экранах */
+  }
+}
+
+/* Основные стили */
+body {
+  background-color: #111;
+  color: white;
+  font-family: "JetBrains Mono", sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Основные стили для хедера */
 .header {
-    width: 100%;
-    max-width: 100vw;
-    padding: 10px 15px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  max-width: 100vw;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(17, 17, 17, 0.5);
+  /* Начальная прозрачность 50% */
+  transition: background-color 0.3s ease;
+  /* Плавное изменение фона */
+}
+
+/* Когда пользователь прокручивает страницу */
+.header.scrolled {
+  background-color: rgba(17, 17, 17, 1);
+  /* Полностью непрозрачный фон */
 }
 
 /* Логотип */
 .logo img {
-    height: 50px;
-    max-width: 100%;
+  height: 50px;
+  max-width: 100%;
 }
 
 /* Меню */
 .nav {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    transition: all 0.3s ease-in-out;
-    width: auto;
-    
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  transition: all 0.3s ease-in-out;
+  width: auto;
 }
 
-.nav a, .footer-contacts a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    white-space: nowrap; /* Блокируем перенос текста */
+.nav a,
+.footer-contacts a {
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+  /* Блокируем перенос текста */
 }
 
 /* Языковой переключатель */
 .language-selector select {
-    background-color: #222;
-    color: white;
-    border: 1px solid #444;
-    padding: 8px 25px 8px 10px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s, border-color 0.3s;
+  background-color: #222;
+  border: 1px solid #444;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 25px 8px 10px;
+  transition: background 0.3s, border-color 0.3s;
 }
 
 .language-selector select:hover {
-    background-color: #333;
+  background-color: #333;
 }
 
 /* Бургер-меню */
-/* Основной стиль для бургер-меню */
 .hamburger-btn {
-    display: none;        /* Включаем флекс-контейнер */
-    flex-direction: column; 
-    gap: 5px;             /* Расстояние между линиями */
-    background: transparent;
-    border: none;
-    cursor: pointer;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  /* Расстояние между линиями */
 }
 
 .hamburger-icon {
-    width: 25px;          /* Ширина линии */
-    height: 3px;          /* Толщина линии */
-    background-color: #fff; /* Цвет линии (белый) */
-    transition: all 0.3s ease;
-    display: block;       /* Чтобы каждая линия была на своей строке */
+  background-color: #fff;
+  display: block;
+  height: 3px;
+  transition: all 0.3s ease;
+  width: 25px;
 }
 
 /* Навигационное меню */
-
 .nav {
-    display: flex; /* Меню всегда флекс, и оно будет видно на больших экранах */
-    gap: 20px;
-    align-items: center;
-    z-index: 1000;
-    transition: transform 0.3s ease, max-height 0.5s ease; /* плавная анимация */
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  transition: transform 0.3s ease, max-height 0.5s ease;
+  z-index: 1000;
 }
 
-/* Когда класс 'show' добавляется, меню должно быть видно */
 .nav.show {
-    transform: translateX(0); /* показываем меню */
+  transform: translateX(0);
 }
 
 /* Стили для ссылок внутри меню */
 .nav ul {
-    list-style: none;
-    padding: 20px;
-    margin: 0;
+  list-style: none;
+  margin: 0;
+  padding: 20px;
 }
 
 .nav li {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
 }
 
-/* Мобильное меню */
+/* Мобильное меню и переупорядочивание элементов */
 @media (max-width: 768px) {
-    .nav {
-        display: none; /* Скрываем меню по умолчанию на мобильных */
-        position: absolute;
-        top: 60px; /* Отступ сверху, если нужно */
-        left: 0;
-        width: 100%;
-        background-color: black;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        padding: 20px 0;
-    }
+  .nav {
+    align-items: center;
+    background-color: black;
+    display: none;
+    /* По умолчанию меню скрыто */
+    flex-direction: column;
+    gap: 10px;
+    left: 0;
+    padding: 20px 0;
+    position: absolute;
+    top: 60px;
+    width: 100%;
+  }
 
-    /* Показываем меню, когда оно открыто */
-    .nav.show {
-        display: block;
-    }
+  .nav.show {
+    display: block;
+  }
 
-    .nav a {
-        width: 100%;
-        padding: 10px 0;
-        display: block;
-        text-align: center;
-    }
+  .nav a {
+    display: block;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    order: 1;
+  }
 
-    /* Показывать бургер-меню только на мобильных */
-    .hamburger-btn {
-        display: flex; /* Показываем на мобильных устройствах */
-    }
+  /* Переупорядочиваем переключатель языка */
+  .language-selector {
+    order: 2;
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .language-selector select {
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* Если нужно задать порядок для оставшихся ссылок, можно добавить: */
+  /* .nav a:nth-child(3),
+     .nav a:nth-child(4) {
+       order: 3;
+     } */
+
+  .hamburger-btn {
+    display: flex;
+  }
 }
 
 /* Герой секция */
 .hero {
-    background: url('../img/image1.png') no-repeat center center/cover;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: relative;
+  background: url('../img/image1.png') no-repeat center center/cover;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
 }
 
 .overlay {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    border-radius: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  padding: 20px;
 }
 
 .hero-title {
-    position: absolute;
-    top: 20%;
-    left: 5%;
-    font-size: 40px;
-    font-weight: bold;
-    max-width: 90vw;
+  font-size: 40px;
+  font-weight: bold;
+  left: 5%;
+  max-width: 90vw;
+  position: absolute;
+  top: 20%;
 }
 
 /* Кнопки */
 .btn {
-    background: #d4a373;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 18px;
-    border-radius: 5px;
-    transition: 0.3s;
+  background: #d4a373;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 10px 20px;
+  transition: 0.3s;
 }
 
 .btn:hover {
-    background: #b5835a;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  background: #b5835a;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 /* Карусель */
 .carousel-container {
-    width: 80%;
-    max-width: 900px;
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-    margin-top: 20px; /* Уменьшаем верхний отступ */
-    margin-bottom: 10px; /* Уменьшаем нижний отступ */
-    
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  max-width: 900px;
+  overflow: hidden;
+  position: relative;
+  width: 80%;
 }
 
 .carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+  display: flex;
+  transition: transform 0.5s ease-in-out;
 }
 
 .carousel-item {
-    flex: 0 0 100%;
-    text-align: center;
-    background: #222;
-    border-radius: 10px;
-    padding-bottom: 1%;
-    padding: 0;
-    margin: 0; /* Убираем внешние отступы */
-    padding-bottom: 1%
+  background: #222;
+  border-radius: 10px;
+  flex: 0 0 100%;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 1%;
+  text-align: center;
 }
 
 .carousel-item img {
-    width: 100%;
-    height: 600px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 5px;
-    display: block;
+  border-radius: 10px;
+  display: block;
+  height: 600px;
+  margin-bottom: 5px;
+  object-fit: cover;
+  width: 100%;
 }
 
-/* Кнопки карусели */
 .carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
 }
 
-.prev { left: 10px; }
-.next { right: 10px; }
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
 
 .carousel-btn:hover {
-    background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7);
 }
 
-/* Мобильная версия */
-@media (max-width: 768px) {
-    .nav {
-        width: 100%;
-        left: 0;
-        text-align: center;
-    }
+/* Мобильная версия: другие стили уже описаны выше */
 
-    .nav a {
-        width: 100%;
-        padding: 10px 0;
-        display: block;
-    }
-}
+/* Герой секция, этапы и т.д. остаются без изменений */
 
 /* Почему мы? */
 .why-us {
-    padding: 50px;
-    background-color: #111;
-    color: white;
-    text-align: center;
+  background-color: #111;
+  color: white;
+  padding: 50px;
+  text-align: center;
 }
 
 .why-us-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    max-width: 1200px;
-    margin: auto;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  max-width: 1200px;
 }
 
-.why-us-text, .why-us-image {
-    flex: 1;
-    min-width: 300px;
-    padding: 20px;
+.why-us-text,
+.why-us-image {
+  flex: 1;
+  min-width: 300px;
+  padding: 20px;
 }
 
 .why-us-image img {
-    max-width: 100%;
-    border-radius: 10px;
+  border-radius: 10px;
+  max-width: 100%;
 }
 
 /* Секционные стили */
 .container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 20px;
+  margin: auto;
+  max-width: 1000px;
+  padding: 20px;
 }
 
 .heroabout {
-    position: relative;
+  position: relative;
 }
 
 .heroabout img {
-    width: 100%;
-    height: auto;
+  height: auto;
+  width: 100%;
 }
 
 .section {
-    margin: 50px 0;
-    text-align: left;
+  margin: 50px 0;
+  text-align: left;
 }
 
 .section h2 {
-    color: #ffb100;
-    font-size: 32px;
-    margin-bottom: 20px;
+  color: #ffb100;
+  font-size: 32px;
+  margin-bottom: 20px;
 }
 
 /* Команда */
 .team {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .team-member {
-    background: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 200px;
-    margin: 10px;
+  background: #1e1e1e;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+  width: 200px;
 }
 
 .team-member img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: #ccc;
-    margin-bottom: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  height: 100px;
+  margin-bottom: 10px;
+  width: 100px;
 }
 
 /* Подвал */
 footer {
-    background-color: black;
-    padding: 20px;
+  background-color: black;
+  padding: 20px 0 40px;
+  /* Нижнее пространство добавлено */
 }
 
 .footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
-/* Логотип */
 .footer-logo img {
-    width: 150px;
+  width: 150px;
 }
 
-/* Блоки футера */
 .footer-services,
 .footer-contacts {
-    flex: 1;
-    text-align: center;
+  flex: 1;
+  text-align: center;
 }
 
 .footer-services h3,
 .footer-contacts h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .footer-services ul,
 .footer-contacts ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .footer-services li,
 .footer-contacts li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 5px;
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 5px;
 }
 
-/* Центрирование текста в футере */
 .footer-text {
-    text-align: center;
-    font-size: 14px;
-    color: white;
-    margin: 0;
+  color: white;
+  font-size: 14px;
+  margin: 0;
+  text-align: center;
 }
 
 /* Мобильная версия футера */
 @media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 20px;
-    }
+  .footer-container {
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
 
-    .footer-logo img {
-        width: 120px;
-    }
+  .footer-logo img {
+    width: 120px;
+  }
 
-    .footer-services h3,
-    .footer-contacts h3 {
-        font-size: 16px;
-    }
+  .footer-services h3,
+  .footer-contacts h3 {
+    font-size: 16px;
+  }
 
-    .footer-services li,
-    .footer-contacts li {
-        font-size: 14px;
-    }
-    .carousel-item img {
-        height: 300px; /* Уменьшаем высоту изображений */
-        width: auto; /* Поддерживаем пропорции */
-    }
-    
-    .carousel-btn {
-        width: 40px; /* Уменьшаем ширину кнопки */
-        height: 40px; /* Уменьшаем высоту кнопки */
-        font-size: 14px; /* Делаем иконку кнопки меньше */
-        padding: 5px;
-    }
+  .footer-services li,
+  .footer-contacts li {
+    font-size: 14px;
+  }
 
-    .prev { 
-        left: 5px; /* Двигаем кнопку левее */
-    }
-    
-    .next { 
-        right: 5px; /* Двигаем кнопку правее */
-    }
+  .carousel-item img {
+    height: 300px;
+    width: auto;
+  }
 
-    .carousel-item img {
-        height: 250px; /* Еще уменьшаем высоту */
-        width: 100%; /* Чтобы не ломалась адаптивность */
-        object-fit: contain; /* Изображения не обрезаются */
-    }
+  .carousel-btn {
+    font-size: 14px;
+    height: 40px;
+    padding: 5px;
+    width: 40px;
+  }
 
-    
+  .prev {
+    left: 5px;
+  }
+
+  .next {
+    right: 5px;
+  }
+
+  .carousel-item img {
+    height: 250px;
+    object-fit: contain;
+    width: 100%;
+  }
 }
-
-
 
 /* Общие стили */
 body {
-    font-family: 'JetBrains Mono', monospace;
-    background-color: #121212;
-    color: white;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Фото */
-  .image-container {
-    position: relative;
-    width: 100%;
-    height: 650px;
-    overflow: hidden;
-  }
-  .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .image-container h1 {
-    position: absolute;
-    top: 20%;
-    left: 5%;
-    font-size: 48px;
-    font-weight: bold;
-    color: white;
-  }
-  
-  /* Навигация по этапам (выравнена по левому краю) */
-  .steps {
-    display: flex;
-    gap: 10px;
-    font-size: 14px;
-    margin: 30px 0 20px 40px;
-    justify-content: flex-start;
-  }
-  .step {
-    color: #D9D9D9;
-    cursor: pointer;
-  }
-  .step.active {
-    color: white;
-    font-weight: bold;
-  }
-  .step::after {
-    content: " → ";
-    color: #D9D9D9;
-  }
-  .step:last-child::after {
-    content: "";
-  }
-  
-  /* Выбор барбера */
-  .barber-selection {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
-    animation: fadeIn 0.3s ease-in-out;
-  }
-  .barber-btn {
-    background-color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-  }
-  .barber-btn.active {
-    background-color: #FFCC6D;
-  }
-  
-  /* Информация о барбере */
-  .barber-info {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
-    margin-bottom: 20px;
-    padding-left: 20px;
-  }
-  .barber-photo {
-    width: 50px;
-    height: 50px;
-    background: gray;
-    border-radius: 50%;
-  }
-  
-  /* Основной контент: Flex-контейнер для этапов */
+  background-color: #121212;
+  color: white;
+  font-family: 'JetBrains Mono', monospace;
+  margin: 0;
+  padding: 0;
+}
+
+/* Фото */
+.image-container {
+  height: 650px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.image-container img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.image-container h1 {
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+  left: 5%;
+  position: absolute;
+  top: 20%;
+}
+
+/* Навигация по этапам */
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 10px;
+  justify-content: flex-start;
+  margin: 30px 0 20px 40px;
+}
+
+.step {
+  color: #D9D9D9;
+  cursor: pointer;
+}
+
+.step.active {
+  color: white;
+  font-weight: bold;
+}
+
+.step::after {
+  color: #D9D9D9;
+  content: " → ";
+}
+
+.step:last-child::after {
+  content: "";
+}
+
+/* Выбор барбера */
+.barber-selection {
+  animation: fadeIn 0.3s ease-in-out;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.barber-btn {
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.barber-btn.active {
+  background-color: #FFCC6D;
+}
+
+/* Информация о барбере */
+.barber-info {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+
+.barber-photo {
+  background: gray;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+/* Основной контент */
+.main-content {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+/* Адаптивное расположение этапа 1 */
+@media (max-width: 1024px) {
   .main-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 30px;
-    gap: 20px;
-    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
   }
-  
-  /* Услуги */
-  .services-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 60px;
-    width: 70%;
-    justify-items: center;
-    margin-bottom: 50px;
-  }
-  .service-card {
-    background-color: #F0E6D2;
-    color: black;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    cursor: pointer;
-    width: 247.63px;
-    height: 146.2px;
-    transition: transform 0.3s;
-  }
-  .service-card:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Меню заказа (для этапов 1,2 и 3) */
+
   .order-menu {
-    background-color: #EBEBEB;
-    color: black;
-    padding: 15px;
-    border-radius: 10px;
-    width: auto;
-    height: auto;
-    margin-top: 30px;
-    margin-right: 20px;
+    margin: 20px auto 0 !important;
+    width: 90%;
   }
-  .order-menu h2 {
-    text-align: center;
-    margin-bottom: 15px;
+}
+
+/* Сетка карточек услуг */
+.services-container {
+  align-items: center;
+  display: grid;
+  gap: 60px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 50px;
+  max-width: 1000px;
+  padding: 20px;
+  justify-items: center;
+  width: 70%;
+}
+
+@media (max-width: 1024px) {
+  .services-container {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .order-list {
-    list-style: none;
-    padding: 0;
+}
+
+@media (max-width: 768px) {
+  .services-container {
+    grid-template-columns: repeat(1, 1fr);
   }
-  .order-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-  .remove-btn {
-    background: none;
-    border: none;
-    color: red;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  .total-price {
-    font-weight: bold;
-    text-align: center;
-    margin: 15px 0;
-  }
-  .order-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #FFCC6D;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  /* Блок с информацией о дате и времени в шаге 3 */
-  .order-menu-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Убираем фиксированную ширину, чтобы не сжималось меню */
-    margin-top: 30px;
-    margin-right: 20px;
-  }
-  .order-summary {
-    background-color: #EBEBEB;
-    color: black;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  .order-summary p {
-    margin: 5px 0;
-    text-align: center;
-    font-size: 16px;
-  }
-  
-  /* Личные данные (шаг 3) */
-  .personal-data-content {
-    width: 70%;
-    margin-top: -20px;
-    margin-left: 20px;
-  }
-  .personal-data-content h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    padding-left: 20px;
-  }
-  .personal-data-content form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 400px;
-  }
-  .personal-data-content label {
-    font-size: 16px;
-  }
-  .personal-data-content input {
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  /* Шаг 4: Подтверждение */
-  .confirmation-content {
-    text-align: center;
-    padding: 40px;
-  }
-  #finalSummary {
-    list-style: none;
-    padding: 0;
-    margin: 20px auto;
-    max-width: 400px;
-    text-align: left;
-  }
-  #finalSummary li {
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-  
-  /* Скрытие элементов */
-  .hidden {
-    display: none;
-  }
-  
-  /* Блок выбора времени (для шага 2) */
-  .time-selection-content {
-    width: 70%;
-    margin-top: -20px;
-    margin-left: 20px;
-  }
-  #timeSelection h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    padding-left: 20px;
-  }
-  .calendar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  .calendar-dates .month {
-    font-size: 24px;
-    color: #D9D9D9;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  .dates-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .date-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .date-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .date-btn.current-week {
-    background-color: #D9D9D9;
-    color: black;
-  }
-  .date-btn.next-week {
-    background-color: #000;
-    color: white;
-  }
-  .date-btn.active {
-    border: 2px solid #FFCC6D;
-  }
-  .date-btn:hover {
-    background-color: #f0f0f0;
-  }
-  .day-label {
-    margin-top: 5px;
-    font-size: 14px;
-    color: #D9D9D9;
-  }
-  
-  /* Выбор времени (слоты) */
+}
+
+/* Услуги */
+.service-card {
+  background-color: #F0E6D2;
+  border-radius: 10px;
+  color: black;
+  cursor: pointer;
+  height: 146.2px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s;
+  width: 247.63px;
+}
+
+.service-card:hover {
+  transform: scale(1.05);
+}
+
+/* Меню заказа */
+.order-menu {
+  background-color: #EBEBEB;
+  border-radius: 10px;
+  color: black;
+  height: auto;
+  margin-right: 20px;
+  margin-top: 30px;
+  padding: 15px;
+  width: auto;
+  margin-bottom: 40px;
+  /* Дополнительное расстояние до футера */
+}
+
+.order-menu h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.order-list {
+  list-style: none;
+  padding: 0;
+}
+
+.order-list li {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.total-price {
+  font-weight: bold;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.order-btn {
+  background-color: #FFCC6D;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+}
+
+/* Блок с информацией о дате и времени в шаге 3 */
+.order-menu-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  margin-top: 30px;
+}
+
+.order-summary {
+  background-color: #EBEBEB;
+  border-radius: 10px;
+  color: black;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 100%;
+}
+
+.order-summary p {
+  font-size: 16px;
+  margin: 5px 0;
+  text-align: center;
+}
+
+/* Личные данные (шаг 3) */
+.personal-data-content {
+  margin-left: 20px;
+  margin-top: -20px;
+  width: 70%;
+}
+
+.personal-data-content h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+
+.personal-data-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+}
+
+.personal-data-content label {
+  font-size: 16px;
+}
+
+.personal-data-content input {
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 10px;
+}
+
+/* Шаг 4: Подтверждение */
+.confirmation-content {
+  padding: 40px;
+  text-align: center;
+}
+
+#finalSummary {
+  list-style: none;
+  margin: 20px auto;
+  max-width: 400px;
+  padding: 0;
+  text-align: left;
+}
+
+#finalSummary li {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Скрытие элементов */
+.hidden {
+  display: none;
+}
+
+/* Блок выбора времени (шаг 2) */
+.time-selection-content {
+  margin-left: 20px;
+  margin-top: -20px;
+  width: 70%;
+}
+
+#timeSelection h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+
+.calendar-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.calendar-dates .month {
+  color: #D9D9D9;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.dates-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.date-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.date-btn {
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  font-weight: bold;
+  height: 40px;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  width: 40px;
+}
+
+.date-btn.current-week {
+  background-color: #D9D9D9;
+  color: black;
+}
+
+.date-btn.next-week {
+  background-color: #000;
+  color: white;
+}
+
+.date-btn.active {
+  border: 2px solid #FFCC6D;
+}
+
+.date-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.day-label {
+  color: #D9D9D9;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Выбор времени (слоты) */
+.time-slots {
+  align-items: center;
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 20px auto;
+  max-width: 900px;
+  padding: 0 40px;
+  justify-content: center;
+}
+
+/* Адаптивное изменение количества столбцов для временных слотов */
+@media (max-width: 1024px) {
   .time-slots {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
-    margin: 20px auto;
-    padding: 0 40px;
-    max-width: 900px;
+    grid-template-columns: repeat(4, 1fr);
   }
-  .time-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    max-width: 130px;
-    padding: 18px 12px;
-    font-size: 20px;
-    font-family: 'JetBrains Mono', monospace;
-    background: #f5f3eb;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
+}
+
+@media (max-width: 600px) {
+  .time-slots {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .time-btn img {
-    width: 22px;
-    height: 22px;
+}
+
+.time-btn {
+  align-items: center;
+  background: #f5f3eb;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  gap: 8px;
+  justify-content: center;
+  max-width: 130px;
+  padding: 18px 12px;
+  transition: transform 0.2s ease-in-out;
+  width: 100%;
+}
+
+.time-btn img {
+  height: 22px;
+  width: 22px;
+}
+
+.time-btn:hover {
+  background-color: #E6DFD0;
+  transform: scale(1.07);
+}
+
+.time-btn.active {
+  background: #f0c040;
+}
+
+.time-icon {
+  height: 18px;
+  width: 18px;
+}
+
+/* Анимация появления */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  .time-btn:hover {
-    transform: scale(1.07);
-    background-color: #E6DFD0;
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .time-btn.active {
-    background: #f0c040;
-  }
-  .time-icon {
-    width: 18px;
-    height: 18px;
-  }
-  
-  /* Анимация появления */
-  .fade-in {
-    animation: fadeIn 0.3s ease-in-out forwards;
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  order-menu {
-    width: 250px; /* Установите фиксированную ширину */
-    min-width: 250px; /* Минимальная ширина */
-    max-width: 250px; /* Максимальная ширина */
-    height: auto;
-  }
-  
+}
+
+order-menu {
+  height: auto;
+  max-width: 250px;
+  min-width: 250px;
+  width: 250px;
+}
+
+/* Дополнительное расстояние между ордер-меню и футером */
+.order-menu {
+  margin-bottom: 40px;
+}

@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-translate="indexTitle">Барбершоп</title>
-  <!-- Подключение шрифта JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
+  <link id="favicon" rel="icon" type="image/png" href="../img/favicon-light.png">
 </head>
-
 <body>
-  <!-- Header -->
   <header class="header">
     <div class="logo">
-      <img src="../img/image_29-removebg-preview 1.png" alt="Logo">
+      <a href="index.html"><img src="../img/image_29-removebg-preview 1.png" alt="Logo"></a>
     </div>
     <button class="hamburger-btn">
       <span class="hamburger-icon"></span>
@@ -26,45 +23,34 @@
     <nav class="nav" id="navMenu">
       <a href="../index.html" data-translate="home">Главная</a>
       <a href="services.html" data-translate="services">Услуги</a>
-      <a href="../pages/about.html" data-translate="about">О нас</a>
+      <a href="about.html" data-translate="about">О нас</a>
       <a href="#contact" data-translate="contacts">Контакты</a>
-      <!-- Выбор языка -->
       <div class="language-selector">
         <select id="languageSelect">
-          <option value="ru">Русский</option>
-          <option value="en">English</option>
-          <option value="ro">Română</option>
+          <option value="ru">RU</option>
+          <option value="en">EN</option>
+          <option value="ro">RO</option>
         </select>
       </div>
     </nav>
   </header>
-
-  <!-- Фото и заголовок -->
   <div class="image-container">
     <img src="../img/handsome-man-barbershop-shaving-beard 1.png" alt="Барбершоп">
     <h1 data-translate="services">Услуги</h1>
   </div>
-
-  <!-- Этапы -->
   <div class="steps">
     <span class="step active" data-translate="step1">Выбор услуг</span>
     <span class="step" data-translate="step2">Выбор времени</span>
     <span class="step" data-translate="step3">Личные данные</span>
     <span class="step" data-translate="step4">Подтверждение</span>
   </div>
-
-  <!-- Выбор барбера -->
   <div class="barber-selection">
     <button class="barber-btn active" data-barber="top" data-translate="topBarber">Top barber</button>
     <button class="barber-btn" data-barber="good" data-translate="goodBarber">Good barber</button>
     <button class="barber-btn" data-barber="junior" data-translate="juniorBarber">Junior barber</button>
   </div>
-
-  <!-- Шаг 1: Выбор услуг -->
   <div class="main-content" id="step-1">
-    <div class="services-container">
-      <!-- Карточки услуг будут сгенерированы -->
-    </div>
+    <div class="services-container"></div>
     <div class="order-menu">
       <h2 data-translate="yourServices">Ваши услуги</h2>
       <ul class="order-list"></ul>
@@ -75,14 +61,11 @@
       <button class="order-btn" id="toStep2" data-translate="continue">Продолжить</button>
     </div>
   </div>
-
-  <!-- Шаг 2: Выбор времени -->
   <div id="step-2" class="hidden">
     <div class="main-content">
       <div class="time-selection-content">
         <h2 data-translate="chooseTime">Выберите время</h2>
         <div class="barber-info">
-          <!-- Убрана надпись "Фото" -->
           <div class="barber-photo"></div>
           <div>
             <p><strong data-translate="barberName">Имя барбера</strong></p>
@@ -105,8 +88,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Шаг 3: Личные данные -->
   <div id="step-3" class="hidden">
     <div class="main-content">
       <div class="personal-data-content">
@@ -122,10 +103,8 @@
       </div>
       <div class="order-menu-container">
         <div class="order-summary">
-          <p><strong data-translate="date">Дата:</strong> <span id="summaryDate" data-translate="selectDate">не
-              выбрана</span></p>
-          <p><strong data-translate="time">Время:</strong> <span id="summaryTime" data-translate="selectTime">не
-              выбрано</span></p>
+          <p><strong data-translate="date">Дата:</strong> <span id="summaryDate" data-translate="selectDate">не выбрана</span></p>
+          <p><strong data-translate="time">Время:</strong> <span id="summaryTime" data-translate="selectTime">не выбрано</span></p>
         </div>
         <div class="order-menu">
           <h2 data-translate="yourServices">Ваши услуги</h2>
@@ -139,8 +118,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Шаг 4: Подтверждение -->
   <div id="step-4" class="hidden">
     <div class="confirmation-content">
       <h2 data-translate="step4">Подтверждение</h2>
@@ -148,7 +125,6 @@
       <button class="order-btn" id="finalConfirm" data-translate="finalConfirm">Подтвердить заказ</button>
     </div>
   </div>
-
   <footer id="contact">
     <div class="footer-container">
       <div class="footer-logo">
@@ -174,8 +150,7 @@
           </li>
           <li class="contact-item">
             <img src="../img/Локация.svg" alt="Адрес">
-            <a href="https://maps.app.goo.gl/9taKbz49qYcP1yCP8" target="_blank" data-translate="address">Balti,
-              Alexandru cel Bun 40a</a>
+            <a href="https://maps.app.goo.gl/9taKbz49qYcP1yCP8" target="_blank" data-translate="address">Balti, Alexandru cel Bun 40a</a>
           </li>
           <li class="contact-item">
             <img src="../img/Telegram.svg" alt="Telegram">
@@ -189,12 +164,11 @@
       </div>
     </div>
     <div class="footer-text">
-      <p data-translate="projectNote"> Сайт сделан в рамках проекта Tekwill </p>
+      <p data-translate="projectNote">Сайт сделан в рамках проекта Tekwill</p>
       <p>© 2025 Top Man Barbershop</p>
     </div>
   </footer>
   <script src="../JS/scripts_translate.js"></script>
   <script src="../JS/script.js"></script>
 </body>
-
 </html>

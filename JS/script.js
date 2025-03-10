@@ -1,3 +1,39 @@
+// Обработчик бургер-меню для мобильной версии
+document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.querySelector(".hamburger-btn");
+  const nav = document.querySelector(".nav");
+  const navLinks = document.querySelectorAll(".nav a");
+
+  if (burger && nav) {
+    burger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!nav.contains(e.target) && !burger.contains(e.target)) {
+        nav.classList.remove("show");
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("show");
+      });
+    });
+  }
+});
+
+// Обработчик скролла для изменения прозрачности хедера
+window.addEventListener("scroll", () => {
+  const header = document.querySelector(".header");
+  if (window.pageYOffset > 0) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
+});
+
 // Данные услуг для каждого барбера
 const services = {
   top: [
@@ -29,303 +65,309 @@ const services = {
   ]
 };
 
-let selectedBarber = "top";  // Барбер по умолчанию
+let selectedBarber = "top";
 let selectedServices = [];
 let selectedDate = null;
 let selectedTime = null;
 
 function renderServices() {
-const container = document.querySelector(".services-container");
-container.innerHTML = "";
-if (!services[selectedBarber]) return;
-services[selectedBarber].forEach(service => {
-  const card = document.createElement("div");
-  card.classList.add("service-card");
-  card.innerHTML = `
-    <p>${service.name}</p>
-    <small>${service.time}</small>
-    <p>${service.price} MDL</p>
-  `;
-  card.addEventListener("click", () => addService(service));
-  container.appendChild(card);
-});
+  const container = document.querySelector(".services-container");
+  container.innerHTML = "";
+  if (!services[selectedBarber]) return;
+  services[selectedBarber].forEach(service => {
+    const card = document.createElement("div");
+    card.classList.add("service-card");
+    card.innerHTML = `
+      <p>${service.name}</p>
+      <small>${service.time}</small>
+      <p>${service.price} MDL</p>
+    `;
+    card.addEventListener("click", () => addService(service));
+    container.appendChild(card);
+  });
 }
 
 function addService(service) {
-if (selectedServices.some(s => s.name === service.name)) return;
-selectedServices.push(service);
-updateOrder();
+  if (selectedServices.some(s => s.name === service.name)) return;
+  selectedServices.push(service);
+  updateOrder();
 }
 
 function updateOrder() {
-// Обновляем все списки заказов (на обоих этапах)
-const orderLists = document.querySelectorAll(".order-list");
-orderLists.forEach(orderList => {
-  orderList.innerHTML = "";
-  selectedServices.forEach(service => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      ${service.name} - ${service.price} MDL
-      <button class="remove-btn">&times;</button>
-    `;
-    li.querySelector(".remove-btn").addEventListener("click", () => {
-      selectedServices = selectedServices.filter(s => s.name !== service.name);
-      saveToLocalStorage();
-      updateOrder();
+  const orderLists = document.querySelectorAll(".order-list");
+  orderLists.forEach(orderList => {
+    orderList.innerHTML = "";
+    selectedServices.forEach(service => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        ${service.name} - ${service.price} MDL
+        <button class="remove-btn">&times;</button>
+      `;
+      li.querySelector(".remove-btn").addEventListener("click", () => {
+        selectedServices = selectedServices.filter(s => s.name !== service.name);
+        saveToLocalStorage();
+        updateOrder();
+      });
+      orderList.appendChild(li);
     });
-    orderList.appendChild(li);
   });
-});
-// Обновляем итоговую сумму: выбираем элемент с классом .total-sum
-const totalElements = document.querySelectorAll(".total-price .total-sum");
-const total = selectedServices.reduce((sum, s) => sum + s.price, 0);
-totalElements.forEach(el => el.textContent = total);
-saveToLocalStorage();
+  const totalElements = document.querySelectorAll(".total-price .total-sum");
+  const total = selectedServices.reduce((sum, s) => sum + s.price, 0);
+  totalElements.forEach(el => el.textContent = total);
+  saveToLocalStorage();
 }
 
 function saveToLocalStorage() {
-localStorage.setItem('selectedServices', JSON.stringify(selectedServices));
+  localStorage.setItem('selectedServices', JSON.stringify(selectedServices));
 }
 
 function loadFromLocalStorage() {
-const saved = JSON.parse(localStorage.getItem('selectedServices')) || [];
-selectedServices = saved;
-updateOrder();
-renderServices();
+  const saved = JSON.parse(localStorage.getItem('selectedServices')) || [];
+  selectedServices = saved;
+  updateOrder();
+  renderServices();
 }
 
 document.querySelectorAll(".barber-btn").forEach(btn => {
-btn.addEventListener("click", () => {
-  document.querySelectorAll(".barber-btn").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-  selectedBarber = btn.getAttribute("data-barber");
-  selectedServices = [];
-  renderServices();
-  updateOrder();
-});
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".barber-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    selectedBarber = btn.getAttribute("data-barber");
+    selectedServices = [];
+    renderServices();
+    updateOrder();
+  });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-loadFromLocalStorage();
-renderServices();
+  loadFromLocalStorage();
+  renderServices();
 });
 
-// Обновление шагов по навигации
+// Обновление шагов
 function updateStep(currentStep) {
-document.querySelectorAll(".step").forEach((step, index) => {
-  step.classList.toggle("active", index === currentStep);
-});
+  document.querySelectorAll(".step").forEach((step, index) => {
+    step.classList.toggle("active", index === currentStep);
+  });
 }
 
 document.querySelectorAll(".step").forEach((step, index) => {
-step.addEventListener("click", () => {
-  if (index === 0) {
-    document.querySelector("#step-1").style.display = "flex";
-    document.querySelector("#step-2").style.display = "none";
-    document.querySelector("#step-3").style.display = "none";
-    if(document.querySelector("#step-4")) document.querySelector("#step-4").style.display = "none";
-    document.querySelector(".barber-selection").style.display = "flex";
-    updateStep(0);
-  } else if (index === 1) {
-    if (selectedServices.length === 0) {
-      alert(translate("pleaseSelectAtLeastOneService"));
-      return;
+  step.addEventListener("click", () => {
+    if (index === 0) {
+      document.querySelector("#step-1").style.display = "flex";
+      document.querySelector("#step-2").style.display = "none";
+      document.querySelector("#step-3").style.display = "none";
+      if (document.querySelector("#step-4")) {
+        document.querySelector("#step-4").style.display = "none";
+      }
+      document.querySelector(".barber-selection").style.display = "flex";
+      updateStep(0);
+    } else if (index === 1) {
+      if (selectedServices.length === 0) {
+        alert(translate("pleaseSelectAtLeastOneService"));
+        return;
+      }
+      document.querySelector("#step-1").style.display = "none";
+      document.querySelector("#step-2").style.display = "block";
+      document.querySelector("#step-3").style.display = "none";
+      document.querySelector(".barber-selection").style.display = "none";
+      updateStep(1);
+      renderCalendar();
+      renderTimeSlots();
+    } else if (index === 2) {
+      const form = document.getElementById("personalDataForm");
+      if (!form.checkValidity()) {
+        alert(translate("pleaseFillPersonalData"));
+        return;
+      }
+      if (!selectedDate || !selectedTime) {
+        alert(translate("pleaseSelectDateAndTime"));
+        return;
+      }
+      document.querySelector("#step-1").style.display = "none";
+      document.querySelector("#step-2").style.display = "none";
+      document.querySelector("#step-3").style.display = "block";
+      updateStep(2);
+      updateOrderSummary();
+    } else if (index === 3) {
+      const form = document.getElementById("personalDataForm");
+      if (!form.checkValidity() || !selectedDate || !selectedTime) {
+        alert(translate("pleaseFillPersonalData"));
+        return;
+      }
+      document.querySelector("#step-1").style.display = "none";
+      document.querySelector("#step-2").style.display = "none";
+      document.querySelector("#step-3").style.display = "none";
+      document.querySelector("#step-4").style.display = "block";
+      updateStep(3);
+      renderFinalSummary();
     }
-    document.querySelector("#step-1").style.display = "none";
-    document.querySelector("#step-2").style.display = "block";
-    document.querySelector("#step-3").style.display = "none";
-    document.querySelector(".barber-selection").style.display = "none";
-    updateStep(1);
-    renderCalendar();
-    renderTimeSlots();
-  } else if (index === 2) {
-    const form = document.getElementById("personalDataForm");
-    if (!form.checkValidity()) {
-      alert(translate("pleaseFillPersonalData"));
-      return;
-    }
-    if (!selectedDate || !selectedTime) {
-      alert(translate("pleaseSelectDateAndTime"));
-      return;
-    }
-    document.querySelector("#step-1").style.display = "none";
-    document.querySelector("#step-2").style.display = "none";
-    document.querySelector("#step-3").style.display = "block";
-    updateStep(2);
-    updateOrderSummary();
-  } else if (index === 3) {
-    // Новая проверка: нельзя переходить на шаг 4, если форма личных данных не заполнена
-    const form = document.getElementById("personalDataForm");
-    if (!form.checkValidity()) {
-      alert(translate("pleaseFillPersonalData"));
-      return;
-    }
-    if (!selectedDate || !selectedTime) {
-      alert(translate("pleaseSelectDateAndTime"));
-      return;
-    }
-    document.querySelector("#step-1").style.display = "none";
-    document.querySelector("#step-2").style.display = "none";
-    document.querySelector("#step-3").style.display = "none";
-    document.querySelector("#step-4").style.display = "block";
-    updateStep(3);
-    renderFinalSummary();
-  }
-});
+  });
 });
 
 document.querySelector("#toStep2").addEventListener("click", () => {
-if (selectedServices.length === 0) {
-  alert(translate("pleaseSelectAtLeastOneService"));
-  return;
-}
-document.querySelector("#step-1").style.display = "none";
-document.querySelector("#step-2").style.display = "block";
-if(document.querySelector("#step-3")) document.querySelector("#step-3").style.display = "none";
-document.querySelector(".barber-selection").style.display = "none";
-updateStep(1);
-renderCalendar();
-renderTimeSlots();
+  if (selectedServices.length === 0) {
+    alert(translate("pleaseSelectAtLeastOneService"));
+    return;
+  }
+  document.querySelector("#step-1").style.display = "none";
+  document.querySelector("#step-2").style.display = "block";
+  if (document.querySelector("#step-3"))
+    document.querySelector("#step-3").style.display = "none";
+  document.querySelector(".barber-selection").style.display = "none";
+  updateStep(1);
+  renderCalendar();
+  renderTimeSlots();
 });
 
 document.querySelector("#toStep3")?.addEventListener("click", () => {
-if (!selectedDate || !selectedTime) {
-  alert(translate("pleaseSelectDateAndTime"));
-  return;
-}
-document.querySelector("#step-2").style.display = "none";
-document.querySelector("#step-3").style.display = "block";
-updateStep(2);
-updateOrderSummary();
+  if (!selectedDate || !selectedTime) {
+    alert(translate("pleaseSelectDateAndTime"));
+    return;
+  }
+  document.querySelector("#step-2").style.display = "none";
+  document.querySelector("#step-3").style.display = "block";
+  updateStep(2);
+  updateOrderSummary();
 });
 
 document.querySelector("#toStep4")?.addEventListener("click", () => {
-const form = document.getElementById("personalDataForm");
-if (!form.checkValidity()) {
-  alert(translate("pleaseFillPersonalData"));
-  return;
-}
-document.querySelector("#step-3").style.display = "none";
-document.querySelector("#step-4").style.display = "block";
-updateStep(3);
-renderFinalSummary();
+  const form = document.getElementById("personalDataForm");
+  if (!form.checkValidity()) {
+    alert(translate("pleaseFillPersonalData"));
+    return;
+  }
+  document.querySelector("#step-3").style.display = "none";
+  document.querySelector("#step-4").style.display = "block";
+  updateStep(3);
+  renderFinalSummary();
 });
 
 document.querySelector("#finalConfirm")?.addEventListener("click", () => {
-alert(translate("orderConfirmed"));
-localStorage.removeItem('selectedServices');
-location.reload();
+  alert(translate("orderConfirmed"));
+  localStorage.removeItem('selectedServices');
+  location.reload();
 });
 
 function updateOrderSummary() {
-const summaryDate = document.getElementById("summaryDate");
-const summaryTime = document.getElementById("summaryTime");
-summaryDate.textContent = selectedDate ? new Date(selectedDate).toLocaleDateString() : translate("selectDate");
-summaryTime.textContent = selectedTime || translate("selectTime");
+  const summaryDate = document.getElementById("summaryDate");
+  const summaryTime = document.getElementById("summaryTime");
+  summaryDate.textContent = selectedDate ? new Date(selectedDate).toLocaleDateString() : translate("selectDate");
+  summaryTime.textContent = selectedTime || translate("selectTime");
 }
 
 function renderFinalSummary() {
-const finalSummary = document.getElementById("finalSummary");
-finalSummary.innerHTML = "";
-const servicesItem = document.createElement("li");
-servicesItem.innerHTML = `<strong>${translate("servicesLabel")}:</strong> ${selectedServices.map(s => s.name).join(", ")}`;
-finalSummary.appendChild(servicesItem);
-const dateItem = document.createElement("li");
-dateItem.innerHTML = `<strong>${translate("date")}:</strong> ${selectedDate ? new Date(selectedDate).toLocaleDateString() : translate("selectDate")}`;
-finalSummary.appendChild(dateItem);
-const timeItem = document.createElement("li");
-timeItem.innerHTML = `<strong>${translate("time")}:</strong> ${selectedTime || translate("selectTime")}`;
-finalSummary.appendChild(timeItem);
-const firstName = document.getElementById("firstName").value;
-const lastName = document.getElementById("lastName").value;
-const phone = document.getElementById("phone").value;
-const personalItem = document.createElement("li");
-personalItem.innerHTML = `<strong>${translate("personalDataLabel")}:</strong> ${firstName} ${lastName}, ${translate("phone")}: ${phone}`;
-finalSummary.appendChild(personalItem);
+  const finalSummary = document.getElementById("finalSummary");
+  finalSummary.innerHTML = "";
+  const servicesItem = document.createElement("li");
+  servicesItem.innerHTML = `<strong>${translate("servicesLabel")}:</strong> ${selectedServices.map(s => s.name).join(", ")}`;
+  finalSummary.appendChild(servicesItem);
+  const dateItem = document.createElement("li");
+  dateItem.innerHTML = `<strong>${translate("date")}:</strong> ${selectedDate ? new Date(selectedDate).toLocaleDateString() : translate("selectDate")}`;
+  finalSummary.appendChild(dateItem);
+  const timeItem = document.createElement("li");
+  timeItem.innerHTML = `<strong>${translate("time")}:</strong> ${selectedTime || translate("selectTime")}`;
+  finalSummary.appendChild(timeItem);
+  const firstName = document.getElementById("firstName").value;
+  const lastName = document.getElementById("lastName").value;
+  const phone = document.getElementById("phone").value;
+  const personalItem = document.createElement("li");
+  personalItem.innerHTML = `<strong>${translate("personalDataLabel")}:</strong> ${firstName} ${lastName}, ${translate("phone")}: ${phone}`;
+  finalSummary.appendChild(personalItem);
 }
 
 function renderCalendar() {
-const calendarContainer = document.querySelector(".calendar-dates");
-calendarContainer.innerHTML = "";
-const today = new Date();
-// Массив ключей месяцев
-const monthKeys = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const month = translate(monthKeys[today.getMonth()]);
-const monthElement = document.createElement("div");
-monthElement.classList.add("month");
-monthElement.textContent = month;
-calendarContainer.appendChild(monthElement);
-const datesWrapper = document.createElement("div");
-datesWrapper.classList.add("dates-wrapper");
-// Массив ключей дней недели
-const dayKeys = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-for (let i = 0; i < 7; i++) {
-  const date = new Date();
-  date.setDate(today.getDate() + i);
-  const btn = document.createElement("button");
-  btn.classList.add("date-btn");
-  btn.textContent = date.getDate();
-  const dayLabel = document.createElement("div");
-  dayLabel.textContent = translate(dayKeys[(date.getDay() + 6) % 7]);
-  dayLabel.classList.add("day-label");
-  const dateWrapper = document.createElement("div");
-  dateWrapper.classList.add("date-wrapper");
-  dateWrapper.appendChild(btn);
-  dateWrapper.appendChild(dayLabel);
-  datesWrapper.appendChild(dateWrapper);
-  btn.addEventListener("click", () => {
-    datesWrapper.querySelectorAll(".date-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    selectedDate = date;
-    saveToSessionStorage();
-    renderTimeSlots();
-  });
-}
-calendarContainer.appendChild(datesWrapper);
+  const calendarContainer = document.querySelector(".calendar-dates");
+  calendarContainer.innerHTML = "";
+  const today = new Date();
+  const monthKeys = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const month = translate(monthKeys[today.getMonth()]);
+  const monthElement = document.createElement("div");
+  monthElement.classList.add("month");
+  monthElement.textContent = month;
+  calendarContainer.appendChild(monthElement);
+  const datesWrapper = document.createElement("div");
+  datesWrapper.classList.add("dates-wrapper");
+  const dayKeys = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+  for (let i = 0; i < 7; i++) {
+    const date = new Date();
+    date.setDate(today.getDate() + i);
+    const btn = document.createElement("button");
+    btn.classList.add("date-btn");
+    btn.textContent = date.getDate();
+    const dayLabel = document.createElement("div");
+    dayLabel.textContent = translate(dayKeys[(date.getDay() + 6) % 7]);
+    dayLabel.classList.add("day-label");
+    const dateWrapper = document.createElement("div");
+    dateWrapper.classList.add("date-wrapper");
+    dateWrapper.appendChild(btn);
+    dateWrapper.appendChild(dayLabel);
+    datesWrapper.appendChild(dateWrapper);
+    btn.addEventListener("click", () => {
+      datesWrapper.querySelectorAll(".date-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      selectedDate = date;
+      saveToSessionStorage();
+      renderTimeSlots();
+    });
+  }
+  calendarContainer.appendChild(datesWrapper);
 }
 
 function saveToSessionStorage() {
-if (selectedDate) {
-  sessionStorage.setItem('selectedDate', selectedDate.toISOString());
-}
+  if (selectedDate) {
+    sessionStorage.setItem('selectedDate', selectedDate.toISOString());
+  }
 }
 
 function renderTimeSlots() {
-const timeSlotsContainer = document.querySelector(".time-slots");
-timeSlotsContainer.innerHTML = "";
-const times = [
-  "9:00", "9:30", "10:00", "10:30", "11:00", "11:30",
-  "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
-  "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
-  "18:00", "18:30"
-];
-times.forEach(time => {
-  const btn = document.createElement("button");
-  btn.classList.add("time-btn");
-  btn.textContent = time;
-  if (selectedTime === time) {
-    btn.classList.add("active");
-  }
-  const icon = document.createElement("img");
-  icon.classList.add("time-icon");
-  const [hour] = time.split(":").map(Number);
-  if (hour < 12) {
-    icon.src = "../img/morning.svg";
-    icon.alt = translate("morning");
-  } else if (hour < 16) {
-    icon.src = "../img/day.svg";
-    icon.alt = translate("day");
-  } else {
-    icon.src = "../img/night.svg";
-    icon.alt = translate("evening");
-  }
-  btn.prepend(icon);
-  btn.addEventListener("click", () => {
-    timeSlotsContainer.querySelectorAll(".time-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    selectedTime = time;
-    saveToSessionStorage();
+  const timeSlotsContainer = document.querySelector(".time-slots");
+  timeSlotsContainer.innerHTML = "";
+  const times = [
+    "9:00", "9:30", "10:00", "10:30", "11:00", "11:30",
+    "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
+    "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
+    "18:00", "18:30"
+  ];
+  times.forEach(time => {
+    const btn = document.createElement("button");
+    btn.classList.add("time-btn");
+    btn.textContent = time;
+    if (selectedTime === time) {
+      btn.classList.add("active");
+    }
+    const icon = document.createElement("img");
+    icon.classList.add("time-icon");
+    const [hour] = time.split(":").map(Number);
+    if (hour < 12) {
+      icon.src = "../img/morning.svg";
+      icon.alt = translate("morning");
+    } else if (hour < 16) {
+      icon.src = "../img/day.svg";
+      icon.alt = translate("day");
+    } else {
+      icon.src = "../img/night.svg";
+      icon.alt = translate("evening");
+    }
+    btn.prepend(icon);
+    btn.addEventListener("click", () => {
+      timeSlotsContainer.querySelectorAll(".time-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      selectedTime = time;
+      saveToSessionStorage();
+    });
+    timeSlotsContainer.appendChild(btn);
   });
-  timeSlotsContainer.appendChild(btn);
-});
 }
+
+   // Отслеживаем прокрутку страницы
+   window.addEventListener('scroll', function() {
+    const header = document.querySelector('.header');
+    
+    // Если прокрутка страницы больше 50px, добавляем класс 'scrolled'
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});

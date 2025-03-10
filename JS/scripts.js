@@ -91,9 +91,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     entry.target.classList.add("visible");
                 }
             });
-        },
-        { threshold: 0.3 }
+        }, {
+            threshold: 0.3
+        }
     );
 
     sections.forEach((section) => observer.observe(section));
+});
+
+   // Отслеживаем прокрутку страницы
+   window.addEventListener('scroll', function() {
+    const header = document.querySelector('.header');
+    
+    // Если прокрутка страницы больше 50px, добавляем класс 'scrolled'
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
 });
