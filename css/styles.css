@@ -9,18 +9,19 @@
   /* Центрирование кнопок */
 }
 
-.service-buttons button {
-  flex: 1 1 calc(50% - 10px);
-  /* Две кнопки в строке с учетом отступов */
-  max-width: calc(50% - 10px);
-  /* Ограничение ширины */
+/* Сохраняем две кнопки в строке для экранов до 1300px */
+@media (max-width: 1300px) {
+  .service-buttons button {
+    flex: 1 1 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+  }
 }
 
+/* Сохраняем две кнопки в строке для экранов до 768px */
 @media (max-width: 768px) {
   .service-buttons button {
-    flex: 1 1 100%;
-    /* Одна кнопка в строке на маленьких экранах */
-    max-width: 100%;
+    flex: 1 1 calc(50% - 10px);
+    max-width: calc(50% - 10px);
   }
 }
 
@@ -177,11 +178,9 @@ body {
     top: 60px;
     width: 100%;
   }
-
   .nav.show {
     display: block;
   }
-
   .nav a {
     display: block;
     padding: 10px 0;
@@ -189,7 +188,6 @@ body {
     width: 100%;
     order: 1;
   }
-
   /* Переупорядочиваем переключатель языка */
   .language-selector {
     order: 2;
@@ -197,18 +195,10 @@ body {
     text-align: center;
     margin: 10px 0;
   }
-
   .language-selector select {
     margin: 0 auto;
     display: block;
   }
-
-  /* Если нужно задать порядок для оставшихся ссылок, можно добавить: */
-  /* .nav a:nth-child(3),
-     .nav a:nth-child(4) {
-       order: 3;
-     } */
-
   .hamburger-btn {
     display: flex;
   }
@@ -316,8 +306,6 @@ body {
   background: rgba(0, 0, 0, 0.7);
 }
 
-/* Мобильная версия: другие стили уже описаны выше */
-
 /* Герой секция, этапы и т.д. остаются без изменений */
 
 /* Почему мы? */
@@ -404,7 +392,6 @@ body {
 footer {
   background-color: black;
   padding: 20px 0 40px;
-  /* Нижнее пространство добавлено */
 }
 
 .footer-container {
@@ -462,41 +449,33 @@ footer {
     gap: 20px;
     text-align: center;
   }
-
   .footer-logo img {
     width: 120px;
   }
-
   .footer-services h3,
   .footer-contacts h3 {
     font-size: 16px;
   }
-
   .footer-services li,
   .footer-contacts li {
     font-size: 14px;
   }
-
   .carousel-item img {
     height: 300px;
     width: auto;
   }
-
   .carousel-btn {
     font-size: 14px;
     height: 40px;
     padding: 5px;
     width: 40px;
   }
-
   .prev {
     left: 5px;
   }
-
   .next {
     right: 5px;
   }
-
   .carousel-item img {
     height: 250px;
     object-fit: contain;
@@ -620,7 +599,6 @@ body {
     flex-direction: column;
     align-items: center;
   }
-
   .order-menu {
     margin: 20px auto 0 !important;
     width: 90%;
@@ -640,7 +618,7 @@ body {
   width: 70%;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1300px) {
   .services-container {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -680,7 +658,6 @@ body {
   padding: 15px;
   width: auto;
   margin-bottom: 40px;
-  /* Дополнительное расстояние до футера */
 }
 
 .order-menu h2 {
@@ -893,7 +870,6 @@ body {
   justify-content: center;
 }
 
-/* Адаптивное изменение количества столбцов для временных слотов */
 @media (max-width: 1024px) {
   .time-slots {
     grid-template-columns: repeat(4, 1fr);
@@ -952,14 +928,13 @@ body {
     opacity: 0;
     transform: translateY(10px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-order-menu {
+.order-menu {
   height: auto;
   max-width: 250px;
   min-width: 250px;
