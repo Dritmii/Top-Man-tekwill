@@ -1,37 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
+    /* Меню */
     const burger = document.querySelector(".hamburger-btn");
     const nav = document.querySelector(".nav");
     const navLinks = document.querySelectorAll(".nav a");
 
-    // Обработчик для открытия и закрытия меню
     if (burger && nav) {
         burger.addEventListener("click", function (event) {
             event.stopPropagation();
             nav.classList.toggle("show");
         });
 
-        // Закрытие меню при клике вне бургер-меню или навигации
         document.addEventListener("click", function (event) {
             if (!burger.contains(event.target) && !nav.contains(event.target)) {
                 nav.classList.remove("show");
             }
         });
 
-        // Закрытие меню при клике на любую ссылку
-        navLinks.forEach(link => {
+        navLinks.forEach((link) => {
             link.addEventListener("click", function () {
                 nav.classList.remove("show");
             });
         });
     }
 
+    /* Кнопки "Запись" */
+    function showAlert() {
+        alert("Функция записи еще не реализована");
+    }
 
     const bookingButtons = document.querySelectorAll(".btn[data-translate='booking']");
-    bookingButtons.forEach(button => {
+    bookingButtons.forEach((button) => {
         button.addEventListener("click", showAlert);
     });
 
-    // === КАРУСЕЛЬ ===
+    /* Карусель */
     const carousel = document.querySelector(".carousel");
     const slides = document.querySelectorAll(".carousel-item");
     const prevButton = document.querySelector(".carousel-btn.prev");
@@ -40,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let index = 0;
 
     function updateCarousel() {
-        const slideWidth = slides[0]?.offsetWidth || 0; // Проверка на ширину слайда
+        const slideWidth = slides[0]?.offsetWidth || 0;
         if (carousel && slideWidth > 0) {
             carousel.style.transform = `translateX(-${index * slideWidth}px)`;
         }
@@ -61,11 +63,11 @@ document.addEventListener("DOMContentLoaded", function () {
         nextButton.addEventListener("click", nextSlide);
     }
 
-    setInterval(nextSlide, 5000); // Плавный переход с интервалом
+    setInterval(nextSlide, 5000);
     window.addEventListener("resize", updateCarousel);
     updateCarousel();
 
-    // === СМЕНА ЯЗЫКА ===
+    /* Смена языка */
     const languageSelect = document.querySelector("#languageSelect");
     if (languageSelect) {
         languageSelect.addEventListener("change", function () {
@@ -78,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
         languageSelect.value = savedLang;
     }
 
-    // === АНИМАЦИЯ ПРИ ПРОКРУТКЕ ===
+    /* Анимация при прокрутке */
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(
         (entries) => {
@@ -87,22 +89,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     entry.target.classList.add("visible");
                 }
             });
-        }, {
-            threshold: 0.3
-        }
+        },
+        { threshold: 0.3 }
     );
 
     sections.forEach((section) => observer.observe(section));
 });
 
-   // Отслеживаем прокрутку страницы
-   window.addEventListener('scroll', function() {
-    const header = document.querySelector('.header');
-    
-    // Если прокрутка страницы больше 50px, добавляем класс 'scrolled'
+window.addEventListener("scroll", function () {
+    const header = document.querySelector(".header");
     if (window.scrollY > 50) {
-        header.classList.add('scrolled');
+        header.classList.add("scrolled");
     } else {
-        header.classList.remove('scrolled');
+        header.classList.remove("scrolled");
     }
 });

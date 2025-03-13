@@ -1,4 +1,4 @@
-/* Обновление стилей для кнопок выбора услуги */
+/* Блок: Обновление стилей для кнопок выбора услуги */
 .service-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -9,7 +9,7 @@
   /* Центрирование кнопок */
 }
 
-/* Сохраняем две кнопки в строке для экранов до 1300px */
+/* Блок: Сохранение двух кнопок в строке для экранов до 1300px */
 @media (max-width: 1300px) {
   .service-buttons button {
     flex: 1 1 calc(50% - 10px);
@@ -17,7 +17,7 @@
   }
 }
 
-/* Сохраняем две кнопки в строке для экранов до 768px */
+/* Блок: Сохранение двух кнопок в строке для экранов до 768px */
 @media (max-width: 768px) {
   .service-buttons button {
     flex: 1 1 calc(50% - 10px);
@@ -25,7 +25,7 @@
   }
 }
 
-/* Убираем фиксированное позиционирование у меню заказа */
+/* Блок: Меню заказа (отмена фиксированного позиционирования) */
 .order-menu {
   margin-top: 20px;
   /* Отступ сверху для визуального разделения */
@@ -40,7 +40,7 @@
   }
 }
 
-/* Основные стили */
+/* Блок: Основные стили страницы */
 body {
   background-color: #111;
   color: white;
@@ -49,7 +49,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Основные стили для хедера */
+/* Блок: Основные стили для хедера */
 .header {
   width: 100%;
   max-width: 100vw;
@@ -68,19 +68,18 @@ body {
   /* Плавное изменение фона */
 }
 
-/* Когда пользователь прокручивает страницу */
 .header.scrolled {
   background-color: rgba(17, 17, 17, 1);
   /* Полностью непрозрачный фон */
 }
 
-/* Логотип */
+/* Блок: Логотип */
 .logo img {
   height: 50px;
   max-width: 100%;
 }
 
-/* Меню */
+/* Блок: Стили для меню */
 .nav {
   align-items: center;
   display: flex;
@@ -95,10 +94,10 @@ body {
   font-size: 14px;
   text-decoration: none;
   white-space: nowrap;
-  /* Блокируем перенос текста */
+  /* Блокирует перенос текста */
 }
 
-/* Языковой переключатель */
+/* Блок: Языковой переключатель */
 .language-selector select {
   background-color: #222;
   border: 1px solid #444;
@@ -114,7 +113,7 @@ body {
   background-color: #333;
 }
 
-/* Бургер-меню */
+/* Блок: Бургер-меню */
 .hamburger-btn {
   background: transparent;
   border: none;
@@ -133,7 +132,7 @@ body {
   width: 25px;
 }
 
-/* Навигационное меню */
+/* Блок: Навигационное меню */
 .nav {
   align-items: center;
   display: flex;
@@ -146,7 +145,7 @@ body {
   transform: translateX(0);
 }
 
-/* Стили для ссылок внутри меню */
+/* Блок: Стили для ссылок внутри меню */
 .nav ul {
   list-style: none;
   margin: 0;
@@ -163,7 +162,7 @@ body {
   text-decoration: none;
 }
 
-/* Мобильное меню и переупорядочивание элементов */
+/* Блок: Мобильное меню и переупорядочивание элементов */
 @media (max-width: 768px) {
   .nav {
     align-items: center;
@@ -178,9 +177,11 @@ body {
     top: 60px;
     width: 100%;
   }
+
   .nav.show {
     display: block;
   }
+
   .nav a {
     display: block;
     padding: 10px 0;
@@ -188,23 +189,26 @@ body {
     width: 100%;
     order: 1;
   }
-  /* Переупорядочиваем переключатель языка */
+
+  /* Переупорядочивание переключателя языка */
   .language-selector {
     order: 2;
     width: 100%;
     text-align: center;
     margin: 10px 0;
   }
+
   .language-selector select {
     margin: 0 auto;
     display: block;
   }
+
   .hamburger-btn {
     display: flex;
   }
 }
 
-/* Герой секция */
+/* Блок: Герой секция */
 .hero {
   background: url('../img/image1.png') no-repeat center center/cover;
   display: flex;
@@ -230,7 +234,7 @@ body {
   top: 20%;
 }
 
-/* Кнопки */
+/* Блок: Кнопки */
 .btn {
   background: #d4a373;
   border: none;
@@ -247,7 +251,7 @@ body {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-/* Карусель */
+/* Блок: Карусель */
 .carousel-container {
   margin: auto;
   margin-bottom: 10px;
@@ -306,9 +310,7 @@ body {
   background: rgba(0, 0, 0, 0.7);
 }
 
-/* Герой секция, этапы и т.д. остаются без изменений */
-
-/* Почему мы? */
+/* Блок: Почему? */
 .why-us {
   background-color: #111;
   color: white;
@@ -337,7 +339,7 @@ body {
   max-width: 100%;
 }
 
-/* Секционные стили */
+/* Блок: Секционные стили */
 .container {
   margin: auto;
   max-width: 1000px;
@@ -364,7 +366,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* Команда */
+/* Блок: Команда */
 .team {
   display: flex;
   flex-wrap: wrap;
@@ -388,7 +390,7 @@ body {
   width: 100px;
 }
 
-/* Подвал */
+/* Блок: Подвал */
 footer {
   background-color: black;
   padding: 20px 0 40px;
@@ -441,7 +443,7 @@ footer {
   text-align: center;
 }
 
-/* Мобильная версия футера */
+/* Блок: Мобильная версия футера */
 @media (max-width: 768px) {
   .footer-container {
     align-items: center;
@@ -449,33 +451,41 @@ footer {
     gap: 20px;
     text-align: center;
   }
+
   .footer-logo img {
     width: 120px;
   }
+
   .footer-services h3,
   .footer-contacts h3 {
     font-size: 16px;
   }
+
   .footer-services li,
   .footer-contacts li {
     font-size: 14px;
   }
+
   .carousel-item img {
     height: 300px;
     width: auto;
   }
+
   .carousel-btn {
     font-size: 14px;
     height: 40px;
     padding: 5px;
     width: 40px;
   }
+
   .prev {
     left: 5px;
   }
+
   .next {
     right: 5px;
   }
+
   .carousel-item img {
     height: 250px;
     object-fit: contain;
@@ -483,7 +493,7 @@ footer {
   }
 }
 
-/* Общие стили */
+/* Блок: Общие стили */
 body {
   background-color: #121212;
   color: white;
@@ -492,7 +502,7 @@ body {
   padding: 0;
 }
 
-/* Фото */
+/* Блок: Фото */
 .image-container {
   height: 650px;
   overflow: hidden;
@@ -515,7 +525,7 @@ body {
   top: 20%;
 }
 
-/* Навигация по этапам */
+/* Блок: Навигация по этапам */
 .steps {
   display: flex;
   flex-wrap: wrap;
@@ -544,7 +554,7 @@ body {
   content: "";
 }
 
-/* Выбор барбера */
+/* Блок: Выбор барбера */
 .barber-selection {
   animation: fadeIn 0.3s ease-in-out;
   display: flex;
@@ -567,7 +577,7 @@ body {
   background-color: #FFCC6D;
 }
 
-/* Информация о барбере */
+/* Блок: Информация о барбере */
 .barber-info {
   align-items: center;
   display: flex;
@@ -583,7 +593,7 @@ body {
   width: 50px;
 }
 
-/* Основной контент */
+/* Блок: Основной контент */
 .main-content {
   align-items: flex-start;
   display: flex;
@@ -593,19 +603,20 @@ body {
   margin-top: 30px;
 }
 
-/* Адаптивное расположение этапа 1 */
+/* Блок: Адаптивное расположение этапа 1 */
 @media (max-width: 1024px) {
   .main-content {
     flex-direction: column;
     align-items: center;
   }
+
   .order-menu {
     margin: 20px auto 0 !important;
     width: 90%;
   }
 }
 
-/* Сетка карточек услуг */
+/* Блок: Сетка карточек услуг */
 .services-container {
   align-items: center;
   display: grid;
@@ -630,7 +641,7 @@ body {
   }
 }
 
-/* Услуги */
+/* Блок: Услуги */
 .service-card {
   background-color: #F0E6D2;
   border-radius: 10px;
@@ -647,7 +658,7 @@ body {
   transform: scale(1.05);
 }
 
-/* Меню заказа */
+/* Блок: Меню заказа */
 .order-menu {
   background-color: #EBEBEB;
   border-radius: 10px;
@@ -700,7 +711,7 @@ body {
   width: 100%;
 }
 
-/* Блок с информацией о дате и времени в шаге 3 */
+/* Блок: Блок с информацией о дате и времени в шаге 3 */
 .order-menu-container {
   align-items: center;
   display: flex;
@@ -724,7 +735,7 @@ body {
   text-align: center;
 }
 
-/* Личные данные (шаг 3) */
+/* Блок: Личные данные (шаг 3) */
 .personal-data-content {
   margin-left: 20px;
   margin-top: -20px;
@@ -755,7 +766,7 @@ body {
   padding: 10px;
 }
 
-/* Шаг 4: Подтверждение */
+/* Блок: Шаг 4: Подтверждение */
 .confirmation-content {
   padding: 40px;
   text-align: center;
@@ -774,12 +785,12 @@ body {
   margin-bottom: 10px;
 }
 
-/* Скрытие элементов */
+/* Блок: Скрытие элементов */
 .hidden {
   display: none;
 }
 
-/* Блок выбора времени (шаг 2) */
+/* Блок: Блок выбора времени (шаг 2) */
 .time-selection-content {
   margin-left: 20px;
   margin-top: -20px;
@@ -858,7 +869,7 @@ body {
   margin-top: 5px;
 }
 
-/* Выбор времени (слоты) */
+/* Блок: Выбор времени (слоты) */
 .time-slots {
   align-items: center;
   display: grid;
@@ -882,6 +893,7 @@ body {
   }
 }
 
+/* Блок: Кнопки времени */
 .time-btn {
   align-items: center;
   background: #f5f3eb;
@@ -918,7 +930,7 @@ body {
   width: 18px;
 }
 
-/* Анимация появления */
+/* Блок: Анимация появления */
 .fade-in {
   animation: fadeIn 0.3s ease-in-out forwards;
 }
@@ -928,12 +940,14 @@ body {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+/* Блок: Дополнительное расстояние между ордер-меню и футером */
 .order-menu {
   height: auto;
   max-width: 250px;
@@ -941,7 +955,6 @@ body {
   width: 250px;
 }
 
-/* Дополнительное расстояние между ордер-меню и футером */
 .order-menu {
   margin-bottom: 40px;
 }
