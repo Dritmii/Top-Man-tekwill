@@ -237,14 +237,15 @@ body {
 /* Блок: Кнопки */
 .btn {
   background: #d4a373;
-  border: none;
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
   font-size: 18px;
   padding: 10px 20px;
   transition: 0.3s;
+  margin-bottom: 20px; /* Отступ снизу */
 }
+
 
 .btn:hover {
   background: #b5835a;
@@ -260,11 +261,13 @@ body {
   overflow: hidden;
   position: relative;
   width: 80%;
+
 }
 
 .carousel {
   display: flex;
   transition: transform 0.5s ease-in-out;
+  height: 700px;
 }
 
 .carousel-item {
@@ -491,6 +494,11 @@ footer {
     object-fit: contain;
     width: 100%;
   }
+  
+  .carousel {
+    height: 350px;
+  }
+  
 }
 
 /* Блок: Общие стили */
