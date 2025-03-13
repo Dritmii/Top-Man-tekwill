@@ -25,10 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // === КНОПКИ "ЗАПИСЬ" ===
-    function showAlert() {
-        alert("Функция записи еще не реализована");
-    }
 
     const bookingButtons = document.querySelectorAll(".btn[data-translate='booking']");
     bookingButtons.forEach(button => {
