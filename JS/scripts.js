@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", showAlert);
     });
 
-    /* Карусель */
+  // === КАРУСЕЛЬ ===
     const carousel = document.querySelector(".carousel");
     const slides = document.querySelectorAll(".carousel-item");
     const prevButton = document.querySelector(".carousel-btn.prev");
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let index = 0;
 
     function updateCarousel() {
-        const slideWidth = slides[0]?.offsetWidth || 0;
+        const slideWidth = slides[0]?.offsetWidth || 0; // Проверка на ширину слайда
         if (carousel && slideWidth > 0) {
             carousel.style.transform = `translateX(-${index * slideWidth}px)`;
         }
@@ -58,23 +58,9 @@ document.addEventListener("DOMContentLoaded", function () {
         nextButton.addEventListener("click", nextSlide);
     }
 
-    setInterval(nextSlide, 5000);
+    setInterval(nextSlide, 5000); // Плавный переход с интервалом
     window.addEventListener("resize", updateCarousel);
     updateCarousel();
-
-    /* Смена языка */
-    const languageSelect = document.querySelector("#languageSelect");
-    if (languageSelect) {
-        languageSelect.addEventListener("change", function () {
-            const selectedLanguage = languageSelect.value;
-            localStorage.setItem("lang", selectedLanguage);
-            location.reload();
-        });
-
-        const savedLang = localStorage.getItem("lang") || "ru";
-        languageSelect.value = savedLang;
-    }
-
     /* Анимация при прокрутке */
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(
