@@ -107,10 +107,10 @@ const translations = {
     projectNote: "Сайт сделан в рамках проекта Tekwill"
   },
   en: {
-    home: "HOME",
-    services: "SERVICES",
-    about: "ABOUT US",
-    contacts: "CONTATCS",
+    home: "Home",
+    services: "Services",
+    about: "About Us",
+    contacts: "Contacts",
     step1: "Choose Services",
     step2: "Choose Time",
     step3: "Personal Details",
@@ -213,10 +213,10 @@ const translations = {
     projectNote: "Website created as part of the Tekwill project"
   },
   ro: {
-    home: "PRINCIPALĂ",
-    services: "SERVICII",
-    about: "DESPRE NOI",
-    contacts: "CONTACTE",    
+    home: "Principală",
+    services: "Servicii",
+    about: "Despre noi",
+    contacts: "Contacte",
     step1: "Alege Servicii",
     step2: "Alege Timpul",
     step3: "Date Personale",

@@ -360,21 +360,14 @@ function renderTimeSlots() {
   });
 }
 
-// Отслеживаем прокрутку страницы
-window.addEventListener('scroll', function () {
-  const header = document.querySelector('.header');
-
-  // Если прокрутка страницы больше 50px, добавляем класс 'scrolled'
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-});
-
-document.getElementById('phone').addEventListener('keypress', function(event) {
-  // Разрешаем ввод только цифр и знака "+".
-  if (!/[0-9+]/.test(event.key)) {
-    event.preventDefault();
-  }
+   // Отслеживаем прокрутку страницы
+   window.addEventListener('scroll', function() {
+    const header = document.querySelector('.header');
+    
+    // Если прокрутка страницы больше 50px, добавляем класс 'scrolled'
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
 });
