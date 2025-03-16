@@ -849,7 +849,7 @@ body {
   font-weight: bold;
   height: 40px;
   justify-content: center;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, border 0.3s ease, color 0.3s ease, transform 0.2s ease-in-out;
   width: 40px;
 }
 
@@ -864,7 +864,10 @@ body {
 }
 
 .date-btn.active {
-  border: 2px solid #FFCC6D;
+  background-color: #f0c040; /* Заливка цветом, как у кнопок времени */
+  border: 2px solid #FFCC6D; /* Граница для выделения */
+  color: black; /* Цвет текста для читаемости */
+  transform: scale(1.07); /* Эффект масштабирования, как у кнопок времени */
 }
 
 .date-btn:hover {
