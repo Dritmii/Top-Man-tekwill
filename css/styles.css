@@ -244,6 +244,7 @@ body {
   padding: 10px 20px;
   transition: 0.3s;
   margin-bottom: 20px; /* Отступ снизу */
+  text-decoration: none;
 }
 
 
